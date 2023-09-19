@@ -1,0 +1,67 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.header {
+height: 25rem;
+background-color: #333;
+color: #999;
+display: flex;
+justify-content: space-around;
+flex-direction: row;
+
+}
+
+.stock_info {
+    height: 25rem;
+    background-color: #333;
+    color: #999;
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+}
+
+.stock_search {
+    height: 25rem;
+    background-color: #333;
+    color: #999;
+display: flex;
+justify-content: space-around;
+flex-direction: column;
+}
+
+
+.news {
+    height: 25rem;
+background-color: #999;
+color: #333;
+display: flex;
+justify-content: space-around;
+flex-direction: row;
+}
+
+
+
+.news_search{
+    /* height: ; */
+    background-color: #666;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 2rem
+
+}
+
+.news_results{
+    /* height: ; */
+    background-color: #999;
+    color: #333;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    font-size: 2rem
+
+}
