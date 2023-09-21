@@ -1,15 +1,17 @@
 // Variable Declaration area*********
 
 // these Var's are connected to the user input form on the search modal
-var flightNumberSearchEl = document.getElementById('flight-search-input')
-var departureCitySearchEl = document.getElementById('departure-search-input')
-var arrivalCitySearchEl = document.getElementById('arrival-search-input')
+var flightNumberSearchEl = document.querySelector('#flight-search-input')
+var departureCitySearchEl = document.querySelector('#departure-search-input')
+var arrivalCitySearchEl = document.querySelector('#arrival-search-input')
 
 // previous searches table found in search modal 
+var flightFormEl = document.getElementById('flight-form')
 var searchTableBodyEl = document.getElementById('table-body')
 var clearSearchHistoryBtnEl = document.getElementById('clear-search-history')
 var cancelModalBtnEl = document.getElementById('modal-cancel')
-var modalSearchBtnEl = document.getElementById('modal-searchTableBodyEl')
+var modalSearchBtnEl = document.querySelector('#modal-search')
+console.log(flightFormEl)
 
 
 // these Var's are the display below the header and above weather 
@@ -37,17 +39,34 @@ var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 
 // Declaring the "search object" so it can be prepared for later use in the API's
     //and for storage/ recall of previous searches
-var previousFlight = {
+
+// function flightSearch(){
+
+//     var previousFlightsObj = {
+//         number: flightNumberSearchEl.value.trim(),
+//         departure: departureCitySearchEl.value.trim(),
+//         arrival : arrivalCitySearchEl.value.trim(),
+//     }
+
+// var previousFlightsObj = ('')
+
+// previousFlightsObj.push(number,departure,arrival)
+
+    
+
+// var previousFlightArray = ('')
+// previousFlightArray.push(previousFlightsObj)
+// }
 
 
-}
 
 
 
 
-
-modalSearchBtnEl.addEventListener('click', () => {
-console.log(flightNumberSearchEl)
+flightFormEl.addEventListener('submit',  (e) => {
+e.preventDefault()
+   
+console.log("tacos")
 
 })
 
@@ -63,26 +82,26 @@ console.log(flightNumberSearchEl)
 
 // Flight API Section********
 
-const departures = 'https://opensky-network.org/api/flights/departure?airport=EDDF&begin=1517227200&end=1517230800'
+// const departures = 'https://opensky-network.org/api/flights/departure?airport=EDDF&begin=1517227200&end=1517230800'
 
-//pulls data on 50 EST departures based on airport and displays it to the console.
-function showDepartures() {
-    fetch(departures)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Fetched Data:', data);
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error);
-        });
-}
-showDepartures()
+// //pulls data on 50 EST departures based on airport and displays it to the console.
+// function showDepartures() {
+//     fetch(departures)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then(data => {
+//             console.log('Fetched Data:', data);
+//         })
+//         .catch(error => {
+//             console.error('Fetch Error:', error);
+//         });
+// }
+// showDepartures()
 
 
-// Weather API Section **************
+// // Weather API Section **************
 
