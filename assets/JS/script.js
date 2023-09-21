@@ -1,7 +1,19 @@
+// Variable Declaration area*********
+
+
+
+
+
+
+
 // api's to be used
 //  https://openskynetwork.github.io/opensky-api/rest.html 
 //  https://open-meteo.com/
 
+
+
+
+// Flight API Section********
 
 const departures = 'https://opensky-network.org/api/flights/departure?airport=EDDF&begin=1517227200&end=1517230800'
 
@@ -22,4 +34,7 @@ function showDepartures() {
         });
 }
 showDepartures()
+
+
+// Weather API Section **************
 
