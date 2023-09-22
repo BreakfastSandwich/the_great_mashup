@@ -59,10 +59,6 @@ var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 // }
 
 
-
-
-
-
 flightFormEl.addEventListener('submit',  (e) => {
 e.preventDefault()
    
@@ -70,38 +66,57 @@ console.log("tacos")
 
 })
 
-
-
-
 // api's to be used
 //  https://openskynetwork.github.io/opensky-api/rest.html 
 //  https://open-meteo.com/
 
 
 
-
 // Flight API Section********
 
-// const departures = 'https://opensky-network.org/api/flights/departure?airport=EDDF&begin=1517227200&end=1517230800'
+function calculateTimeWindow() {
+    const now = new Date();
+    const beginTime = Math.floor((now.getTime() / 1000) - 3600); // One-hour window
+    const endTime = Math.floor(now.getTime() / 1000);
 
-// //pulls data on 50 EST departures based on airport and displays it to the console.
-// function showDepartures() {
-//     fetch(departures)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(`HTTP error! Status: ${response.status}`);
-//             }
-//             return response.json();
-//         })
-//         .then(data => {
-//             console.log('Fetched Data:', data);
-//         })
-//         .catch(error => {
-//             console.error('Fetch Error:', error);
-//         });
-// }
-// showDepartures()
+    return { beginTime, endTime };
+}
+    
 
+
+function fetchDepartures(airportCode) {
+    const { beginTime, endTime } = calculateTimeWindow();
+    const departures = 'https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}'
+    
+    fetch(departures, {
+        mode: 'no-cors'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        // Display the Airport Code in departureCityPrintEl
+        departureCityPrintEl.textContent = airportCode
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error)
+    })
+}
+
+flightFormEl.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const airportCode = departureCitySearchEl.value.trim()
+    
+    if (airportCode) {
+        // Fetch departures based on the entered airport code
+        fetchDepartures(airportCode)
+    }
+})
+fetchDepartures()
 
 // // Weather API Section **************
 
