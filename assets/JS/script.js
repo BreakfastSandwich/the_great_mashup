@@ -16,7 +16,7 @@ console.log(flightFormEl)
 
 // these Var's are the display below the header and above weather 
 var flightNumberPrintEl = document.getElementById('flight-number-print')
-var departureCityPrintEl =document.getElementById('departure-city-print')
+var departureCityPrintEl = document.getElementById('departure-city-print')
 var arrivalCityPrintEl = document.getElementById('arrival-city-print')
 var currentFlightStatusPrintEl = document.getElementById('Current-flight-status')
 
@@ -38,7 +38,7 @@ var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 
 
 // Declaring the "search object" so it can be prepared for later use in the API's
-    //and for storage/ recall of previous searches
+//and for storage/ recall of previous searches
 
 // function flightSearch(){
 
@@ -52,17 +52,14 @@ var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 
 // previousFlightsObj.push(number,departure,arrival)
 
-    
+
 
 // var previousFlightArray = ('')
 // previousFlightArray.push(previousFlightsObj)
 // }
 
 
-flightFormEl.addEventListener('submit',  (e) => {
-e.preventDefault()
-   
-console.log("tacos")
+
 
 })
 
