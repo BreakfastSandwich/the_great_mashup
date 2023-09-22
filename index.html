@@ -51,16 +51,16 @@
 
     <div class="container-fluid">
       <div class="row bg-info flight_info">
-        <div id="flight-number-print" class="col-12 col-md-6 col-lg-2 m-5 fs-4 text-center">
+        <div id="flight-number-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
           Flight Number
         </div>
-        <div id="departure-city-print" class="col-12 col-md-6 col-lg-2 m-5 fs-4 text-center">
+        <div id="departure-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center text-wrap">
           <a href="#departure-weather-header">Departure Location</a>
         </div>
-        <div id="arrival-city-print" class="col-12 col-md-6 col-lg-2 m-5 fs-4 text-center">
+        <div id="arrival-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
            <a href="#arrival-weather-header">Arrival Location</a>
         </div>
-        <div id="Current-flight-status" class="col-12 col-md-6 col-lg-2 m-5 fs-4 text-center">
+        <div id="Current-flight-status" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
           Current status
         </div>
         <div class="modal fade" id="flight-tracker-modal" tabindex="-1" aria-labelledby="flight-tracker-modal-label"
@@ -78,11 +78,11 @@
                 <div class="modal-body">
                   <div class="mb-3">
                     <label for="flight-search-input">Flight Number</label>
-                    <input type="text" id="flight-search-input" class="form-control" placeholder="search" required />
+                    <input type="text" id="flight-search-input" class="form-control mb-3" placeholder="search" required />
                     <label for="departure-search-input">Departure City</label>
-                    <input type="text" id="departure-search-input" class="form-control" placeholder="search" required />
+                    <input type="text" id="departure-search-input" class="form-control mb-3" placeholder="search" required />
                     <label for="arrival-search-input">Arrival City</label>
-                    <input type="text" id="arrival-search-input" class="form-control" placeholder="search" required />
+                    <input type="text" id="arrival-search-input" class="form-control  mb-3" placeholder="search" required />
                     <label for="previous_searches">Previous Searches</label>
                     <table id="previous_searches" class="table">
                       <thead>
