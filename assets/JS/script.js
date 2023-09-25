@@ -44,7 +44,6 @@ var arrivalWeatherDay3el = document.getElementById('arrival-day-3')
 var arrivalWeatherDay4el = document.getElementById('arrival-day-4')
 var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 
-//-------------------------------------------------------------------------------------------
 
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
@@ -58,9 +57,9 @@ var previousFlightsObj = []
 function searchFormSubmit() {
  
   
-    var flightInputVal = document.querySelector('#flight-search-input').value;
-    var departureCityVal = document.querySelector('#departure-search-input').value;
-    var arrivalCityVal = document.querySelector('#arrival-search-input').value;
+    flightInputVal = document.querySelector('#flight-search-input').value;
+    departureCityVal = document.querySelector('#departure-search-input').value;
+    arrivalCityVal = document.querySelector('#arrival-search-input').value; 
   
     console.log("tacos")
     console.log(flightInputVal)
@@ -76,7 +75,7 @@ function searchFormSubmit() {
         }
     
     localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
-    
+    geoFetch(); 
 }
 flightFormEl.addEventListener('submit', searchFormSubmit);
 
@@ -218,6 +217,23 @@ function fetchDepartures() {
 
 
 
+var departureCity = departureCitySearchEl.textContent;
+console.log("departureCity = ",departureCity);
+departureCity = "Charlotte";
+
+function geoFetch() {
+
+    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
+    fetch(georequest)
+    .then(function (response) {
+    return response.json();
+    })
+    .then(function (data) {
+    console.log(data);
+    });             
+    }
+    
+    // geoFetch();
 
 
 
@@ -225,21 +241,17 @@ function fetchDepartures() {
 
 
 
+var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
+function testFetch() {
 
 
-
-
-// var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m";
-// function testFetch() {
-
-
-// fetch(requestUrl)
-// .then(function (response) {
-// return response.json();
-// })
-// .then(function (data) {
-// console.log(data);
-// });             
-// }
+fetch(requestUrl)
+.then(function (response) {
+return response.json();
+})
+.then(function (data) {
+console.log(data);
+});             
+}
 
 // testFetch();
