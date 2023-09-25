@@ -37,6 +37,7 @@ var currentFlightStatusPrintEl = document.getElementById("Current-flight-status"
 var departureCityWeatherHeaderEl = document.getElementById(
     "departure-weather-header"
 );
+var departCityNamePrintEl = document.getElementById('Departure-City-Name-Print')
 var departWeatherDay1el = document.getElementById("departure-day-1");
 var departWeatherDay2el = document.getElementById("departure-day-2");
 var departWeatherDay3el = document.getElementById("departure-day-3");
@@ -47,40 +48,22 @@ var departWeatherDay5el = document.getElementById("departure-day-5");
 var arrivalCityWeatherHeaderEl = document.getElementById(
     "arrival-weather-header"
 );
+var arrivalCityNamePrintEl = document.getElementById('Arrival-City-Name-Print')
 var arrivalWeatherDay1el = document.getElementById("arrival-day-1");
 var arrivalWeatherDay2el = document.getElementById("arrival-day-2");
 var arrivalWeatherDay3el = document.getElementById("arrival-day-3");
 var arrivalWeatherDay4el = document.getElementById("arrival-day-4");
 var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
 
-// departure city weather area
-var departureCityWeatherHeaderEl = document.getElementById(
-    "departure-weather-header"
-);
-var departWeatherDay1el = document.getElementById("departure-day-1");
-var departWeatherDay2el = document.getElementById("departure-day-2");
-var departWeatherDay3el = document.getElementById("departure-day-3");
-var departWeatherDay4el = document.getElementById("departure-day-4");
-var departWeatherDay5el = document.getElementById("departure-day-5");
-
-// arrival city weather area
-var arrivalCityWeatherHeaderEl = document.getElementById(
-    "arrival-weather-header"
-);
-var arrivalWeatherDay1el = document.getElementById("arrival-day-1");
-var arrivalWeatherDay2el = document.getElementById("arrival-day-2");
-var arrivalWeatherDay3el = document.getElementById("arrival-day-3");
-var arrivalWeatherDay4el = document.getElementById("arrival-day-4");
-var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
 
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-var previousFlights = [];
+// var previousFlights = [];
 
 function searchFormSubmit(event) {
     event.preventDefault()
-    var flightInputVal = document.querySelector("#flight-search-input").value;
+    flightInputVal = document.querySelector("#flight-search-input").value;
     departureCityVal = document.querySelector("#departure-search-input").value;
     arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
@@ -232,7 +215,7 @@ function fetchDepartures() {
 function fetchArrivals() {
     // console.log("airportCode in fetch method" + airportCode)
     const { beginTime, endTime } = calculateTimeWindowD()
-    var airportCodeA = arrivalCityVal// Get the departure city input value
+    var airportCodeA = document.querySelector("#arrival-search-input").value// Get the departure city input value
     const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
 
 
@@ -262,23 +245,23 @@ function fetchArrivals() {
 // // // Weather API Section **************
 
 
-var departureCity = departureCitySearchEl.textContent;
-console.log("departureCity = ", departureCity);
-departureCity = "Charlotte";
+// var departureCity = departureCitySearchEl.textContent;
+// console.log("departureCity = ", departureCity);
+// departureCity = "Charlotte";
 
-function geoFetch() {
+// function geoFetch() {
 
-    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
-    fetch(georequest)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        });
-}
+//     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
+//     fetch(georequest)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//         });
+// }
 
-// geoFetch();
+// // geoFetch();
 
 
 
