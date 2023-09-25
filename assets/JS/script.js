@@ -56,6 +56,36 @@ var arrivalWeatherDay4el = document.getElementById("arrival-day-4");
 var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
 
 
+// departure city weather area
+var departureCityWeatherHeaderEl = document.getElementById(
+    "departure-weather-header"
+);
+
+
+// var airports = [
+//     {
+//         "airportcode": "KCLT",
+//         "city": "charlotte",
+//     },
+//     {
+//         "airportcode": "KLAX",
+//         "city": "los angeles",
+//     },
+//     {
+//         "airportcode": "KATL",
+//         "city": "atlanta",
+//     },
+//     {
+//         "airportcode": "KIAH",
+//         "city": "houston",
+//     },
+//     {
+//         "airportcode": "KIAD",
+//         "city": "washington dc"
+//     }
+// ]
+
+
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
@@ -97,6 +127,8 @@ arrivalCityNamePrintEl.textContent =  arrivalCityVal
 
     fetchDepartures()
     fetchArrivals()
+    geoFetch()
+    geoFetch2()
 }
 
 function retrieveSearch() {
@@ -186,8 +218,8 @@ function calculateTimeWindowD() {
 
 function calculateTimeWindowA() {
     const now = new Date();
-    const beginTime = Math.floor((now.getTime() / 1000) + 1800); // 2-hour window in the future
-    const endTime = beginTime + 900; // 2 hours after beginTime
+    const beginTime = Math.floor((now.getTime() / 1000) + 1800); // 30 minute window in the future
+    const endTime = beginTime + 900; // 15 minutes after beginTime
 
     return { beginTime, endTime }
 }
@@ -220,7 +252,7 @@ function fetchDepartures() {
 //Arrivals
 
 function fetchArrivals() {
-    // console.log("airportCode in fetch method" + airportCode)
+    // console.log("airportCodeA in fetch method" + airportCodeA)
     const { beginTime, endTime } = calculateTimeWindowD()
     var airportCodeA = document.querySelector("#arrival-search-input").value// Get the departure city input value
     const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
@@ -252,21 +284,27 @@ function fetchArrivals() {
 // // // Weather API Section **************
 
 
-// var departureCity = departureCitySearchEl.textContent;
-// console.log("departureCity = ", departureCity);
-// departureCity = "Charlotte";
+
+var departureCity1 = "charlotte";
+console.log("departureCity = ", departureCity1);
+var departureCityVal = departureCity1
+
 
 // function geoFetch() {
 
-//     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
-//     fetch(georequest)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log(data);
-//         });
-// }
+
+    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
+    fetch(georequest)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+
+        testFetch()
+}
+
 
 // // geoFetch();
 
@@ -276,8 +314,8 @@ function fetchArrivals() {
 
 
 
-var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
 function testFetch() {
+    var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=35.22&longitude=-80.84&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
 
 
     fetch(requestUrl)
@@ -290,3 +328,42 @@ function testFetch() {
 }
 
 // testFetch();
+
+var arrivalCity1 = "atlanta";
+console.log("arrivalCity = ", arrivalCity1);
+var arrivalCityVal = arrivalCity1
+
+function geoFetch2() {
+
+    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${arrivalCityVal}&count=10&language=en&format=json`;
+    fetch(georequest)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+
+        testFetch2()
+}
+
+// geoFetch();
+
+
+
+
+
+
+
+
+function testFetch2() {
+    var requestUrl2 = "https://api.open-meteo.com/v1/forecast?latitude=33.74&longitude=-84.38&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
+
+    fetch(requestUrl2)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+}
