@@ -11,14 +11,9 @@ var searchTableBodyEl = document.getElementById('table-body')
 var clearSearchHistoryBtnEl = document.getElementById('clear-search-history')
 var cancelModalBtnEl = document.getElementById('modal-cancel')
 var modalSearchBtnEl = document.querySelector('#modal-search')
-var previousSearchNumber
-var previousDepartureCity
-var previousArrivalCity
-
-
-
-
-
+var previousSearchNumber = document.getElementById('')
+var previousDepartureCity = document.getElementById('')
+var previousArrivalCity = document.getElementById('')
 
 
 // these Var's are the display below the header and above weather 
@@ -49,14 +44,14 @@ var arrivalCityVal;
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
+var previousFlightsObj = []
 
 
 
 
 
-
-function handleSearchFormSubmit(event) {
-    event.preventDefault();
+function searchFormSubmit() {
+ 
   
     flightInputVal = document.querySelector('#flight-search-input').value;
     departureCityVal = document.querySelector('#departure-search-input').value;
@@ -69,7 +64,7 @@ function handleSearchFormSubmit(event) {
 
    
 
-        var previousFlightsObj = {
+        previousFlightsObj = {
             number: flightInputVal,
             departure: departureCityVal,
             arrival : arrivalCityVal,
@@ -77,6 +72,18 @@ function handleSearchFormSubmit(event) {
     
     localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
     geoFetch(); 
+}
+
+function storeSearch () {
+
+    previousFlightsObj = {
+        number: flightInputVal,
+        departure: departureCityVal,
+        arrival : arrivalCityVal,
+    }
+
+localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
+
 }
     
     
