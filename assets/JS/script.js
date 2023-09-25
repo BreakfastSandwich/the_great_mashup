@@ -97,6 +97,13 @@ function searchFormSubmit(event) {
     departureCityVal = document.querySelector("#departure-search-input").value;
     arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
+flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
+departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
+arrivalCityPrintEl.textContent = "Arrival City:\n" +  arrivalCityVal;
+departCityNamePrintEl.textContent = departureCityVal
+arrivalCityNamePrintEl.textContent =  arrivalCityVal
+
+
     console.log("tacos");
     console.log(flightInputVal);
     console.log(departureCityVal);
