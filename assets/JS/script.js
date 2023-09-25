@@ -6,11 +6,6 @@
 
 // Variable Declaration area*********
 
-// these Var's are connected to the user input form on the search modal
-// var flightInputVal = document.querySelector('#flight-search-input').value;//change from string 
-// var departureCityVal = document.querySelector('#departure-search-input').value;
-// var arrivalCityVal = document.querySelector('#arrival-search-input').value;
-
 // previous searches table found in search modal 
 var flightFormEl = document.getElementById('flight-form')
 var searchTableBodyEl = document.getElementById('table-body')
