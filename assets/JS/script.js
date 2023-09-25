@@ -6,6 +6,7 @@
 
 // Variable Declaration area*********
 
+
 // previous searches table found in search modal 
 var flightFormEl = document.getElementById('flight-form')
 var searchTableBodyEl = document.getElementById('table-body')
