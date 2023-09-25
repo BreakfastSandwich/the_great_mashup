@@ -55,6 +55,7 @@ var arrivalWeatherDay3el = document.getElementById("arrival-day-3");
 var arrivalWeatherDay4el = document.getElementById("arrival-day-4");
 var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
 
+
 // departure city weather area
 var departureCityWeatherHeaderEl = document.getElementById(
     "departure-weather-header"
@@ -84,10 +85,11 @@ var departureCityWeatherHeaderEl = document.getElementById(
 //     }
 // ]
 
+
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-var previousFlights = [];
+// var previousFlights = [];
 
 function searchFormSubmit(event) {
     event.preventDefault()
@@ -275,11 +277,14 @@ function fetchArrivals() {
 // // // Weather API Section **************
 
 
+
 var departureCity1 = "charlotte";
 console.log("departureCity = ", departureCity1);
 var departureCityVal = departureCity1
 
-function geoFetch() {
+
+// function geoFetch() {
+
 
     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
     fetch(georequest)
@@ -293,7 +298,8 @@ function geoFetch() {
         testFetch()
 }
 
-// geoFetch();
+
+// // geoFetch();
 
 
 
