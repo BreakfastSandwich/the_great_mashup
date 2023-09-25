@@ -62,7 +62,13 @@ var departureCityWeatherHeaderEl = document.getElementById(
 );
 
 
-// var airports = [
+var cities = [
+    Charlotte = {
+        airportCode : "CLT",
+        Latitude : 35.21   ,
+        Longitude : -80.94  ,
+    }
+    
 //     {
 //         "airportcode": "KCLT",
 //         "city": "charlotte",
@@ -89,13 +95,13 @@ var departureCityWeatherHeaderEl = document.getElementById(
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-// var previousFlights = [];
+var previousFlights = [];
 
 function searchFormSubmit(event) {
     event.preventDefault()
-    flightInputVal = document.querySelector("#flight-search-input").value;
-    departureCityVal = document.querySelector("#departure-search-input").value;
-    arrivalCityVal = document.querySelector("#arrival-search-input").value;
+   var flightInputVal = document.querySelector("#flight-search-input").value;
+   var departureCityVal = document.querySelector("#departure-search-input").value;
+   var arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
 flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
 departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
@@ -117,7 +123,7 @@ arrivalCityNamePrintEl.textContent =  arrivalCityVal
 
     previousFlights.unshift(previousFlightsObj)
 
-    localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlights))
+    localStorage.setItem("previousFlights", JSON.stringify(previousFlightsObj))
     console.log("tacos")
     console.log(previousFlightsObj)
 
@@ -132,7 +138,7 @@ arrivalCityNamePrintEl.textContent =  arrivalCityVal
 }
 
 function retrieveSearch() {
-    var previousSearch = JSON.parse(localStorage.getItem("previousFlightsObj"));
+    var previousSearch = JSON.parse(localStorage.getItem("previousFlights"));
 
     if (previousSearch === null) {
         previousSearchTableEl.setAttribute('style', "display:none;")
@@ -164,24 +170,24 @@ function renderPreviousSearch() {
 
     // Render a new li for each todo
     for (var i = 0; i < 3; i++) {
-        console.log(previousFlights)
+        console.log(previousFlightsObj)
         //   var previousFlightsObj = previousFlightsObj[i];
 
-        var rowEl = document.createElement('tr')
-        rowEl.textContent = i + 1;
-        var numberEl = document.createElement('td')
-        numberEl.textContent = previousFlightsObj.number;
-        console.log(numberEl)
-        var departureEl = document.createElement('td')
-        departureEl.textContent = previousFlightsObj.departure;
-        console.log(departureEl)
-        var arrivalEl = document.createElement('td')
-        arrivalEl.textContent = previousFlightsObj.arrival;
-        console.log(arrivalEl)
+        // var rowEl = document.createElement('tr')
+        // rowEl.textContent = i + 1;
+        // var numberEl = document.createElement('td')
+        // numberEl.textContent = previousFlightsObj.number;
+        // console.log(numberEl)
+        // var departureEl = document.createElement('td')
+        // departureEl.textContent = previousFlightsObj.departure;
+        // console.log(departureEl)
+        // var arrivalEl = document.createElement('td')
+        // arrivalEl.textContent = previousFlightsObj.arrival;
+        // console.log(arrivalEl)
 
 
-        rowEl.appendChild(numberEl, departureEl, arrivalEl);
-        previousSearchTableEl.appendChild(rowEl);
+        // rowEl.appendChild(numberEl, departureEl, arrivalEl);
+        // previousSearchTableEl.appendChild(rowEl);
 
 
 
@@ -303,8 +309,8 @@ var departureCityVal = departureCity1
         });
 
         testFetch()
-}
 
+    // }
 
 // // geoFetch();
 

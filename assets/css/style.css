@@ -15,7 +15,7 @@ body {
 .header_card>img {
     border-radius: .25rem;
     height: 7rem; 
-    aspect-ratio: 16/9;
+    aspect-ratio: auto;
     object-fit: cover;
     width: 100%;
     object-position: center; 
@@ -23,37 +23,34 @@ body {
 
 .header_card {
     border-radius: .5rem;
-    /* background-image:url("../images/airplane.jpg"); */
     height: 7rem; 
     width: 100%;
     height: 9.2rem;
     background-color: rgb(44, 170, 219);
 }
 
-/* .header_card> */
+
 button:hover{
     background-color:  rgb(103, 181, 212);
     
 }
 
-/* .header_text{
-   
-} */
+
 
 .flight_info {
     border-bottom: 2px solid goldenrod;
-    /* box-shadow: 5px 2px 5px 1px rgb(44, 170, 219); */
+
 }
 
 .navbar {
     border-bottom: 2px solid goldenrod;
-    /* box-shadow: 0px 2px 5px 1px goldenrod; */
+   
 }
 
 .card{
 
     box-shadow: 0px 2px 5px 1px goldenrod;
-    /* height: ; */
+   
 }
 
 .weather{
@@ -84,5 +81,18 @@ font-size: 1.4rem;
 .weather_Card {
     background-color: rgb(220, 228, 233);
     height: 15rem;
-    width: 12rem;
+    flex: 0 1 12rem;
+    gap: 1rem;
+   
+
+   
+}
+
+.weather_Card>img {
+    aspect-ratio: auto;
+    object-fit: contain;
+    width: 100%;
+    object-position: center;
+    height: 10rem;
+
 }
