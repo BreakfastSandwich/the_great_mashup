@@ -5,6 +5,11 @@
 //-------------------------------------------------------------------------------------------
 // Variable Declaration area*********
 
+//global var for input values
+var flightInputVal = document.querySelector("#flight-search-input").value;
+var departureCityVal = document.querySelector("#departure-search-input").value;
+var arrivalCityVal = document.querySelector("#arrival-search-input").value;
+
 // these Var's are connected to the user input form on the search modal
 var flightNumberSearchEl = document.querySelector("#flight-search-input");
 var departureCitySearchEl = document.querySelector("#departure-search-input");
@@ -73,10 +78,11 @@ var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
 
 var previousFlights = [];
 
-function searchFormSubmit() {
+function searchFormSubmit(event) {
+    event.preventDefault()
     var flightInputVal = document.querySelector("#flight-search-input").value;
-    var departureCityVal = document.querySelector("#departure-search-input").value;
-    var arrivalCityVal = document.querySelector("#arrival-search-input").value;
+    departureCityVal = document.querySelector("#departure-search-input").value;
+    arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
     console.log("tacos");
     console.log(flightInputVal);
@@ -98,6 +104,9 @@ function searchFormSubmit() {
     flightNumberSearchEl.textContent = ('')
     departureCitySearchEl.textContent = ('')
     arrivalCitySearchEl.textContent = ('')
+
+    fetchDepartures()
+    fetchArrivals()
 }
 
 function retrieveSearch() {
