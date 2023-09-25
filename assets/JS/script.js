@@ -7,9 +7,9 @@
 // Variable Declaration area*********
 
 // these Var's are connected to the user input form on the search modal
-var flightInputVal = document.querySelector('#flight-search-input').value;
-var departureCityVal = document.querySelector('#departure-search-input').value;
-var arrivalCityVal = document.querySelector('#arrival-search-input').value;
+// var flightInputVal = document.querySelector('#flight-search-input').value;//change from string 
+// var departureCityVal = document.querySelector('#departure-search-input').value;
+// var arrivalCityVal = document.querySelector('#arrival-search-input').value;
 
 // previous searches table found in search modal 
 var flightFormEl = document.getElementById('flight-form')
@@ -55,12 +55,11 @@ var previousFlightsObj = []
 
 
 
-function searchFormSubmit() {
- 
-  
+function searchFormSubmit(event) {
+    event.preventDefault()
     var flightInputVal = document.querySelector('#flight-search-input').value;
-    var departureCityVal = document.querySelector('#departure-search-input').value;
-    var arrivalCityVal = document.querySelector('#arrival-search-input').value;
+    departureCityVal = document.querySelector('#departure-search-input').value;
+    arrivalCityVal = document.querySelector('#arrival-search-input').value;
   
     console.log("tacos")
     console.log(flightInputVal)
@@ -77,8 +76,12 @@ function searchFormSubmit() {
     
     localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
     
+    fetchDepartures()
+    fetchArrivals()
 }
+
 flightFormEl.addEventListener('submit', searchFormSubmit);
+
 
 function storeSearch () {
 
@@ -96,9 +99,9 @@ localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
 
 // // Flight API Section********
 
-const airportCode = flightInputVal
+//Departures
 
-function calculateTimeWindow() {
+function calculateTimeWindowD() {
     const now = new Date()
     const beginTime = Math.floor((now.getTime() / 1000) - 3600) // One-hour window
     const endTime = Math.floor(now.getTime() / 1000)
@@ -106,10 +109,20 @@ function calculateTimeWindow() {
     return { beginTime, endTime }
 }
 
+function calculateTimeWindowA() {
+    const now = new Date();
+    const beginTime = Math.floor((now.getTime() / 1000) + 1800); // 2-hour window in the future
+    const endTime = beginTime + 900; // 2 hours after beginTime
+
+    return { beginTime, endTime }
+}
+
 function fetchDepartures() {
     // console.log("airportCode in fetch method" + airportCode)
-    const { beginTime, endTime } = calculateTimeWindow()
+    const { beginTime, endTime } = calculateTimeWindowD()
+    var airportCode = departureCityVal// Get the departure city input value
     const departures = `https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}`
+    
     
     fetch(departures)
     .then(response => {
@@ -119,19 +132,45 @@ function fetchDepartures() {
         return response.json()
     })
     .then(data => {
-        // Display the Airport Code in flightInputVal
-        flightInputVal.textContent = airportCode
+        // Display the Airport Code in departureCityPrintEl
+        departureCityPrintEl.textContent = departureCityVal
     })
     .catch(error => {
         console.error('Fetch Error:', error)
     })
 
-    searchFormSubmit(flightInputVal)
+    console.log(departures)
+}
+
+//Arrivals
+
+function fetchArrivals() {
+    // console.log("airportCode in fetch method" + airportCode)
+    const { beginTime, endTime } = calculateTimeWindowD()
+    var airportCodeA = arrivalCityVal// Get the departure city input value
+    const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
+    
+    
+    fetch(arrivals)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        // Display the Airport Code in departureCityPrintEl
+        arrivalCityPrintEl.textContent = arrivalCityVal
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error)
+    })
+
+    console.log(arrivals)
 }
 
 
 
-// fetchDepartures()
 
 //-------------------------------------------------------------------------------------------
 
