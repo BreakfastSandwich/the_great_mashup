@@ -62,40 +62,12 @@ var departureCityWeatherHeaderEl = document.getElementById(
 );
 
 
-var cities = [
-    Charlotte = {
-        airportCode : "CLT",
-        Latitude : 35.21   ,
-        Longitude : -80.94  ,
-    }
-    
-//     {
-//         "airportcode": "KCLT",
-//         "city": "charlotte",
-//     },
-//     {
-//         "airportcode": "KLAX",
-//         "city": "los angeles",
-//     },
-//     {
-//         "airportcode": "KATL",
-//         "city": "atlanta",
-//     },
-//     {
-//         "airportcode": "KIAH",
-//         "city": "houston",
-//     },
-//     {
-//         "airportcode": "KIAD",
-//         "city": "washington dc"
-//     }
-// ]
 
 
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-var previousFlights = [];
+var previousFlights = [''];
 
 function searchFormSubmit(event) {
     event.preventDefault()
@@ -126,15 +98,19 @@ arrivalCityNamePrintEl.textContent =  arrivalCityVal
     localStorage.setItem("previousFlights", JSON.stringify(previousFlightsObj))
     console.log("tacos")
     console.log(previousFlightsObj)
+    console.log(previousFlights)
+    
 
     flightNumberSearchEl.textContent = ('')
     departureCitySearchEl.textContent = ('')
     arrivalCitySearchEl.textContent = ('')
 
-    fetchDepartures()
-    fetchArrivals()
-    geoFetch()
-    geoFetch2()
+    // fetchDepartures()
+    // fetchArrivals()
+    // geoFetch()
+    // geoFetch2()
+    flightFetch()
+    console.log(flightFetch)
 }
 
 function retrieveSearch() {
@@ -212,105 +188,146 @@ modalSearchBtnEl.addEventListener("click", searchFormSubmit);
 
 // // Flight API Section********
 
-//Departures
+// //Departures
 
-function calculateTimeWindowD() {
-    const now = new Date()
-    const beginTime = Math.floor((now.getTime() / 1000) - 3600) // One-hour window
-    const endTime = Math.floor(now.getTime() / 1000)
+// function calculateTimeWindowD() {
+//     const now = new Date()
+//     const beginTime = Math.floor((now.getTime() / 1000) - 3600) // One-hour window
+//     const endTime = Math.floor(now.getTime() / 1000)
 
-    return { beginTime, endTime }
-}
+//     return { beginTime, endTime }
+// }
 
-function calculateTimeWindowA() {
-    const now = new Date();
-    const beginTime = Math.floor((now.getTime() / 1000) + 1800); // 30 minute window in the future
-    const endTime = beginTime + 900; // 15 minutes after beginTime
+// function calculateTimeWindowA() {
+//     const now = new Date();
+//     const beginTime = Math.floor((now.getTime() / 1000) + 1800); // 30 minute window in the future
+//     const endTime = beginTime + 900; // 15 minutes after beginTime
 
-    return { beginTime, endTime }
-}
+//     return { beginTime, endTime }
+// }
 
-function fetchDepartures() {
-    // console.log("airportCode in fetch method" + airportCode)
-    const { beginTime, endTime } = calculateTimeWindowD()
-    var airportCode = document.querySelector("#departure-search-input").value// Get the departure city input value
-    const departures = `https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}`
-
-
-    fetch(departures)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`)
-            }
-            return response.json()
-        })
-        .then(data => {
-            // Display the Airport Code in departureCityPrintEl
-            departureCityPrintEl.textContent = departureCityVal
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error)
-        })
-
-    console.log(departures)
-}
-
-//Arrivals
-
-function fetchArrivals() {
-    // console.log("airportCodeA in fetch method" + airportCodeA)
-    const { beginTime, endTime } = calculateTimeWindowD()
-    var airportCodeA = document.querySelector("#arrival-search-input").value// Get the departure city input value
-    const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
+// function fetchDepartures() {
+//     // console.log("airportCode in fetch method" + airportCode)
+//     const { beginTime, endTime } = calculateTimeWindowD()
+//     var airportCode = document.querySelector("#departure-search-input").value// Get the departure city input value
+//     const departures = `https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}`
 
 
-    fetch(arrivals)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`)
-            }
-            return response.json()
-        })
-        .then(data => {
-            // Display the Airport Code in departureCityPrintEl
-            arrivalCityPrintEl.textContent = arrivalCityVal
-        })
-        .catch(error => {
-            console.error('Fetch Error:', error)
-        })
+//     fetch(departures)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`)
+//             }
+//             return response.json()
+//         })
+//         .then(data => {
+//             // Display the Airport Code in departureCityPrintEl
+//             departureCityPrintEl.textContent = departureCityVal
+//         })
+//         .catch(error => {
+//             console.error('Fetch Error:', error)
+//         })
 
-    console.log(arrivals)
-}
+//     console.log(departures)
+// }
+
+// //Arrivals
+
+// function fetchArrivals() {
+//     // console.log("airportCodeA in fetch method" + airportCodeA)
+//     const { beginTime, endTime } = calculateTimeWindowD()
+//     var airportCodeA = document.querySelector("#arrival-search-input").value// Get the departure city input value
+//     const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
 
 
+//     fetch(arrivals)
+//         .then(response => {
+//             if (!response.ok) {
+//                 throw new Error(`HTTP error! Status: ${response.status}`)
+//             }
+//             return response.json()
+//         })
+//         .then(data => {
+//             // Display the Airport Code in departureCityPrintEl
+//             arrivalCityPrintEl.textContent = arrivalCityVal
+//         })
+//         .catch(error => {
+//             console.error('Fetch Error:', error)
+//         })
 
-
-//-------------------------------------------------------------------------------------------
-
-// // // Weather API Section **************
+//     console.log(arrivals)
+// }
 
 
 
-var departureCity1 = "charlotte";
-console.log("departureCity = ", departureCity1);
-var departureCityVal = departureCity1
+
+// //-------------------------------------------------------------------------------------------
+
+// // // // Weather API Section **************
 
 
-// function geoFetch() {
+
+// var departureCity1 = "charlotte";
+// console.log("departureCity = ", departureCity1);
+// var departureCityVal = departureCity1
 
 
-    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
-    fetch(georequest)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        });
+// // function geoFetch() {
 
-        testFetch()
 
-    // }
+//     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
+//     fetch(georequest)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//         });
+
+//         testFetch()
+
+//     // }
+
+// // // geoFetch();
+
+
+
+
+
+
+
+// function testFetch() {
+//     var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=35.22&longitude=-80.84&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
+
+
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//         });
+// }
+
+// // testFetch();
+
+// var arrivalCity1 = "atlanta";
+// console.log("arrivalCity = ", arrivalCity1);
+// var arrivalCityVal = arrivalCity1
+
+// function geoFetch2() {
+
+//     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${arrivalCityVal}&count=10&language=en&format=json`;
+//     fetch(georequest)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//         });
+
+//         testFetch2()
+// }
 
 // // geoFetch();
 
@@ -320,56 +337,87 @@ var departureCityVal = departureCity1
 
 
 
-function testFetch() {
-    var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=35.22&longitude=-80.84&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
+
+// function testFetch2() {
+//     var requestUrl2 = "https://api.open-meteo.com/v1/forecast?latitude=33.74&longitude=-84.38&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
+
+//     fetch(requestUrl2)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
+//         });
+// }
 
 
-    fetch(requestUrl)
+
+function flightFetch() {
+
+var flightInputVal = document.querySelector("#flight-search-input").value;
+    var flightRequest = `https://airlabs.co/api/v9/flight?flight_iata=${flightInputVal}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
+   
+    fetch(flightRequest)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             console.log(data);
-        });
+    
+        
+        var departureIATA = data.response.dep_iata
+        var departureGate = data.response.dep_gate
+        var departureTime = data.response.dep_time
+        var departureCity = data.response.dep_city
+
+        var arrivalIATA = data.response.arr_iata
+        var arrivalGate = data.response.arr_gate
+        var arrivalTime = data.response.arr_time
+        var arrivalCity = data.response.arr_city
+
+        
+        // console.log(dataResponse)
+        var currentFlight = {
+            flightDeparture: [
+                {
+                    departureIATACode: departureIATA ,
+                    departureGateCode: departureGate ,
+                    departureTimeCode: departureTime , 
+                    departureCityCode: departureCity                   
+                }
+            ],
+            flightArrival: [
+                {
+                    arrivalIATACode: arrivalIATA ,
+                    arrivalGateCode: arrivalGate ,
+                    arrivalTimeCode: arrivalTime ,
+                    arrivalCityCode: arrivalCity 
+                }
+                
+             ]}
+
+             console.log(currentFlight)
+             
+             var currentFlightArray = JSON.stringify(currentFlight)
+             localStorage.setItem("CurrentFlight", currentFlightArray)
+
+
+
+  
+    
+    
+
+
+        return 
+});
+
+        console.log(flightRequest)
+      
+// console.log(dataResponse)
+        // testFetch2()
 }
 
-// testFetch();
-
-var arrivalCity1 = "atlanta";
-console.log("arrivalCity = ", arrivalCity1);
-var arrivalCityVal = arrivalCity1
-
-function geoFetch2() {
-
-    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${arrivalCityVal}&count=10&language=en&format=json`;
-    fetch(georequest)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        });
-
-        testFetch2()
-}
-
-// geoFetch();
 
 
 
 
-
-
-
-
-function testFetch2() {
-    var requestUrl2 = "https://api.open-meteo.com/v1/forecast?latitude=33.74&longitude=-84.38&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York";
-
-    fetch(requestUrl2)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        });
-}
