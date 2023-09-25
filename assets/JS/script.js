@@ -1,9 +1,15 @@
+// api's to be used
+//  https://openskynetwork.github.io/opensky-api/rest.html 
+//  https://open-meteo.com/
+
+//-------------------------------------------------------------------------------------------
+
 // Variable Declaration area*********
 
 // these Var's are connected to the user input form on the search modal
-var flightNumberSearchEl = document.querySelector('#flight-search-input')
-var departureCitySearchEl = document.querySelector('#departure-search-input')
-var arrivalCitySearchEl = document.querySelector('#arrival-search-input')
+var flightInputVal = document.querySelector('#flight-search-input').value;
+var departureCityVal = document.querySelector('#departure-search-input').value;
+var arrivalCityVal = document.querySelector('#arrival-search-input').value;
 
 // previous searches table found in search modal 
 var flightFormEl = document.getElementById('flight-form')
@@ -38,9 +44,7 @@ var arrivalWeatherDay3el = document.getElementById('arrival-day-3')
 var arrivalWeatherDay4el = document.getElementById('arrival-day-4')
 var arrivalWeatherDay5el = document.getElementById('arrival-day-5')
 
-var flightInputVal;
-var departureCityVal;
-var arrivalCityVal;
+
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
@@ -73,6 +77,7 @@ function searchFormSubmit() {
     localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
     geoFetch(); 
 }
+flightFormEl.addEventListener('submit', searchFormSubmit);
 
 function storeSearch () {
 
@@ -85,68 +90,49 @@ function storeSearch () {
 localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlightsObj));
 
 }
-    
-    
-    
-  
-  
-  flightFormEl.addEventListener('submit', handleSearchFormSubmit);
 
-
-
-
-
-// api's to be used
-//  https://openskynetwork.github.io/opensky-api/rest.html 
-//  https://open-meteo.com/
-
-
+//-------------------------------------------------------------------------------------------
 
 // // Flight API Section********
 
-// function calculateTimeWindow() {
-//     const now = new Date();
-//     const beginTime = Math.floor((now.getTime() / 1000) - 3600); // One-hour window
-//     const endTime = Math.floor(now.getTime() / 1000);
+const airportCode = flightInputVal
 
-//     return { beginTime, endTime };
-// }
+function calculateTimeWindow() {
+    const now = new Date()
+    const beginTime = Math.floor((now.getTime() / 1000) - 3600) // One-hour window
+    const endTime = Math.floor(now.getTime() / 1000)
+
+    return { beginTime, endTime }
+}
+
+function fetchDepartures() {
+    // console.log("airportCode in fetch method" + airportCode)
+    const { beginTime, endTime } = calculateTimeWindow()
+    const departures = `https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}`
     
+    fetch(departures)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        // Display the Airport Code in flightInputVal
+        flightInputVal.textContent = airportCode
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error)
+    })
+
+    searchFormSubmit(flightInputVal)
+}
 
 
-// function fetchDepartures(airportCode) {
-//     const { beginTime, endTime } = calculateTimeWindow();
-//     const departures = 'https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}'
-    
-//     fetch(departures, {
-//         mode: 'no-cors'
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error(`HTTP error! Status: ${response.status}`)
-//         }
-//         return response.json()
-//     })
-//     .then(data => {
-//         // Display the Airport Code in departureCityPrintEl
-//         departureCityPrintEl.textContent = airportCode
-//     })
-//     .catch(error => {
-//         console.error('Fetch Error:', error)
-//     })
-// }
 
-// flightFormEl.addEventListener('submit', (e) => {
-//     e.preventDefault()
-
-//     const airportCode = departureCitySearchEl.value.trim()
-    
-//     if (airportCode) {
-//         // Fetch departures based on the entered airport code
-//         fetchDepartures(airportCode)
-//     }
-// })
 // fetchDepartures()
+
+//-------------------------------------------------------------------------------------------
 
 // // // Weather API Section **************
 
@@ -269,16 +255,3 @@ console.log(data);
 }
 
 // testFetch();
-
-
-
-
-
-
-
-
-
-
-
-
-
