@@ -83,15 +83,15 @@ function searchFormSubmit() {
     console.log(departureCityVal);
     console.log(arrivalCityVal);
 
-   var previousFlightsObj = {
+    var previousFlightsObj = {
         number: flightInputVal,
         departure: departureCityVal,
         arrival: arrivalCityVal,
     };
 
-    previousFlights.push(previousFlightsObj)
+    previousFlights.unshift(previousFlightsObj)
 
-    localStorage.setItem("previousFlightsObj",JSON.stringify(previousFlightsObj))
+    localStorage.setItem("previousFlightsObj", JSON.stringify(previousFlights))
     console.log("tacos")
     console.log(previousFlightsObj)
 
@@ -104,7 +104,7 @@ function retrieveSearch() {
     var previousSearch = JSON.parse(localStorage.getItem("previousFlightsObj"));
 
     if (previousSearch === null) {
-       previousSearchTableEl.setAttribute('style', "display:none;")
+        previousSearchTableEl.setAttribute('style', "display:none;")
     }
 
     console.log(previousSearch);
@@ -112,6 +112,7 @@ function retrieveSearch() {
 
 function displayPreviousSearch() {
     retrieveSearch();
+    renderPreviousSearch();
     console.log("tacos")
 }
 
@@ -119,12 +120,48 @@ function displayPreviousSearch() {
 
 function renderPreviousSearch() {
     // retrieve local storage
+    // Clear todoList element and update todoCountSpan
+    previousSearchTableEl.innerHTML = "";
 
-    displayPreviousSearch;
+    var previousFlightsObj = JSON.parse(localStorage.getItem("previousFlightsObj"))
+
+    if (previousFlightsObj === null) {
+        previousSearchTableEl.setAttribute('style', "display:none;")
+    }
+
+    console.log(previousFlightsObj);
+
+    // Render a new li for each todo
+    for (var i = 0; i < 3; i++) {
+        console.log(previousFlights)
+        //   var previousFlightsObj = previousFlightsObj[i];
+
+        var rowEl = document.createElement('tr')
+        rowEl.textContent = i + 1;
+        var numberEl = document.createElement('td')
+        numberEl.textContent = previousFlightsObj.number;
+        console.log(numberEl)
+        var departureEl = document.createElement('td')
+        departureEl.textContent = previousFlightsObj.departure;
+        console.log(departureEl)
+        var arrivalEl = document.createElement('td')
+        arrivalEl.textContent = previousFlightsObj.arrival;
+        console.log(arrivalEl)
+
+
+        rowEl.appendChild(numberEl, departureEl, arrivalEl);
+        previousSearchTableEl.appendChild(rowEl);
+
+
+
+
+    }
 }
+displayPreviousSearch;
 
 // modalStartBtnEl.addEventListener("click", displayPreviousSearch);
 modalStartBtnEl.addEventListener("click", retrieveSearch);
+modalStartBtnEl.addEventListener("click", displayPreviousSearch);
 modalSearchBtnEl.addEventListener("click", searchFormSubmit);
 
 // api's to be used
@@ -132,7 +169,7 @@ modalSearchBtnEl.addEventListener("click", searchFormSubmit);
 //  https://open-meteo.com/
 
 // // Flight API Section********
-=======
+
 
 //-------------------------------------------------------------------------------------------
 
@@ -159,24 +196,24 @@ function calculateTimeWindowA() {
 function fetchDepartures() {
     // console.log("airportCode in fetch method" + airportCode)
     const { beginTime, endTime } = calculateTimeWindowD()
-    var airportCode = departureCityVal// Get the departure city input value
+    var airportCode = document.querySelector("#departure-search-input").value// Get the departure city input value
     const departures = `https://opensky-network.org/api/flights/departure?airport=${airportCode}&begin=${beginTime}&end=${endTime}`
-    
-    
+
+
     fetch(departures)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`)
-        }
-        return response.json()
-    })
-    .then(data => {
-        // Display the Airport Code in departureCityPrintEl
-        departureCityPrintEl.textContent = departureCityVal
-    })
-    .catch(error => {
-        console.error('Fetch Error:', error)
-    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`)
+            }
+            return response.json()
+        })
+        .then(data => {
+            // Display the Airport Code in departureCityPrintEl
+            departureCityPrintEl.textContent = departureCityVal
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error)
+        })
 
     console.log(departures)
 }
@@ -188,22 +225,22 @@ function fetchArrivals() {
     const { beginTime, endTime } = calculateTimeWindowD()
     var airportCodeA = arrivalCityVal// Get the departure city input value
     const arrivals = `https://opensky-network.org/api/flights/arrival?airport=${airportCodeA}&begin=${beginTime}&end=${endTime}`
-    
-    
+
+
     fetch(arrivals)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`)
-        }
-        return response.json()
-    })
-    .then(data => {
-        // Display the Airport Code in departureCityPrintEl
-        arrivalCityPrintEl.textContent = arrivalCityVal
-    })
-    .catch(error => {
-        console.error('Fetch Error:', error)
-    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`)
+            }
+            return response.json()
+        })
+        .then(data => {
+            // Display the Airport Code in departureCityPrintEl
+            arrivalCityPrintEl.textContent = arrivalCityVal
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error)
+        })
 
     console.log(arrivals)
 }
@@ -217,22 +254,22 @@ function fetchArrivals() {
 
 
 var departureCity = departureCitySearchEl.textContent;
-console.log("departureCity = ",departureCity);
+console.log("departureCity = ", departureCity);
 departureCity = "Charlotte";
 
 function geoFetch() {
 
     var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
     fetch(georequest)
-    .then(function (response) {
-    return response.json();
-    })
-    .then(function (data) {
-    console.log(data);
-    });             
-    }
-    
-    // geoFetch();
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
+}
+
+// geoFetch();
 
 
 
@@ -244,13 +281,13 @@ var requestUrl = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitud
 function testFetch() {
 
 
-fetch(requestUrl)
-.then(function (response) {
-return response.json();
-})
-.then(function (data) {
-console.log(data);
-});             
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+        });
 }
 
 // testFetch();
