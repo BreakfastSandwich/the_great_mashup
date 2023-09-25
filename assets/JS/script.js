@@ -89,7 +89,7 @@ var departureCityWeatherHeaderEl = document.getElementById(
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-// var previousFlights = [];
+var previousFlights = [];
 
 function searchFormSubmit(event) {
     event.preventDefault()
@@ -100,8 +100,8 @@ function searchFormSubmit(event) {
 flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
 departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
 arrivalCityPrintEl.textContent = "Arrival City:\n" +  arrivalCityVal;
-departCityNamePrintEl.textContent = departureCityVal
-arrivalCityNamePrintEl.textContent =  arrivalCityVal
+departCityNamePrintEl.textContent = departureCityVal1
+arrivalCityNamePrintEl.textContent =  arrivalCityVal1
 
 
     console.log("tacos");
@@ -165,7 +165,7 @@ function renderPreviousSearch() {
     // Render a new li for each todo
     for (var i = 0; i < 3; i++) {
         console.log(previousFlights)
-        //   var previousFlightsObj = previousFlightsObj[i];
+        // var previousFlightsObj = previousFlightsObj[i];
 
         var rowEl = document.createElement('tr')
         rowEl.textContent = i + 1;
@@ -287,13 +287,13 @@ function fetchArrivals() {
 
 var departureCity1 = "charlotte";
 console.log("departureCity = ", departureCity1);
-var departureCityVal = departureCity1
+var departureCityVal1 = departureCity1
 
 
-// function geoFetch() {
+function geoFetch() {
 
 
-    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal}&count=10&language=en&format=json`;
+    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${departureCityVal1}&count=10&language=en&format=json`;
     fetch(georequest)
         .then(function (response) {
             return response.json();
@@ -331,11 +331,11 @@ function testFetch() {
 
 var arrivalCity1 = "atlanta";
 console.log("arrivalCity = ", arrivalCity1);
-var arrivalCityVal = arrivalCity1
+var arrivalCityVal1 = arrivalCity1
 
 function geoFetch2() {
 
-    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${arrivalCityVal}&count=10&language=en&format=json`;
+    var georequest = `https://geocoding-api.open-meteo.com/v1/search?name=${arrivalCityVal1}&count=10&language=en&format=json`;
     fetch(georequest)
         .then(function (response) {
             return response.json();
@@ -347,7 +347,7 @@ function geoFetch2() {
         testFetch2()
 }
 
-// geoFetch();
+// geoFetch2();
 
 
 
