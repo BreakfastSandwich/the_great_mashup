@@ -8,17 +8,17 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
 
   <script src="./assets/JS/script.js" defer></script>
   <title>The Great Mashup</title>
 </head>
 
 <body>
-  
+
   <nav class="navbar navbar-light bg-warning">
-    
+
     <div class="container-fluid">
 
 
@@ -31,7 +31,7 @@
           class="d-inline-block align-text-top img-fluid">
 
         <button class="btn btn-block btn-custom btn-info w-100" data-bs-toggle="modal"
-          data-bs-target="#flight-tracker-modal">
+          data-bs-target="#flight-tracker-modal" id="Modal-Start">
           Add a flight
         </button>
 
@@ -58,7 +58,7 @@
           <a href="#departure-weather-header">Departure Location</a>
         </div>
         <div id="arrival-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-           <a href="#arrival-weather-header">Arrival Location</a>
+          <a href="#arrival-weather-header">Arrival Location</a>
         </div>
         <div id="Current-flight-status" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
           Current status
@@ -78,15 +78,19 @@
                 <div class="modal-body">
                   <div class="mb-3">
                     <label for="flight-search-input">Flight Number</label>
-                    <input type="text" id="flight-search-input" class="form-control my-3" placeholder="search" required />
+                    <input type="text" id="flight-search-input" class="form-control my-3" placeholder="search"
+                      required />
                     <label for="departure-search-input">Departure City</label>
-                    <input type="text" id="departure-search-input" class="form-control my-3" placeholder="search" required />
+                    <input type="text" id="departure-search-input" class="form-control my-3" placeholder="search"
+                      required />
                     <label for="arrival-search-input">Arrival City</label>
-                    <input type="text" id="arrival-search-input" class="form-control my-3" placeholder="search" required />
+                    <input type="text" id="arrival-search-input" class="form-control my-3" placeholder="search"
+                      required />
+
                     
-                    <label for="previous_searches">Previous Searches</label>
 
                     <table id="previous_searches" class="table my-3">
+                      <label for="previous_searches">Previous Searches</label>
                       <thead>
                         <tr class="table-info">
                           <th scope="col">#</th>
