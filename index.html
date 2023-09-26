@@ -17,24 +17,17 @@
 
 <body>
 
+<!-- Navbar section and Modal start button -->
   <nav class="navbar navbar-light bg-warning">
-
     <div class="container-fluid">
-
-
-
       <div class="fs-3 text-center header_text">The Great Mashup</div>
-
       <div class="card header_card bg-info" style=" width: 12rem;">
-
         <img src="./assets/images/airplane.jpg" alt="" width="290rem" height="100%"
           class="d-inline-block align-text-top img-fluid">
-
         <button class="btn btn-block btn-custom btn-info w-100" data-bs-toggle="modal"
           data-bs-target="#flight-tracker-modal" id="Modal-Start">
           Add a flight
         </button>
-
       </div>
     </div>
   </nav>
@@ -43,26 +36,39 @@
   <main>
 
 
-    <div class="container-fluid">
-      <div class="row bg-info">
-
-      </div>
-    </div>
+<!-- Print section under Navbar -->
 
     <div class="container-fluid">
       <div class="row bg-info flight_info">
-        <div id="flight-number-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          Flight Number
+
+        <div class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          Flight Number <br>
+          <p id="flight-number-print"></p> <br>
+          <p>Departure Gate</p>
+          <p id="departure-gate"></p>
+
         </div>
-        <div id="departure-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center text-wrap">
-          <a href="#departure-weather-header">Departure Location</a>
+        <div id="departure-city" class="col-md-12 col-lg-2 m-5 fs-4 text-center text-wrap">
+          <a href="#departure-weather-header">Departure City</a><br>
+          <p id="departure-city-print"></p><br>
+          <p>Airport Code</p>
+          <p id="departure-IATA"></p>
         </div>
-        <div id="arrival-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          <a href="#arrival-weather-header">Arrival Location</a>
+        <div id="arrival-city" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          <a href="#arrival-weather-header">Arrival City 
+          </a><br>
+          <p id="arrival-city-print"></p><br>
+          <p>Airport Code</p>
+          <p id="arrival-IATA"></p>
         </div>
-        <div id="Current-flight-status" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          Current status
-        </div>
+        <div  class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          Current Status <br>
+          <p id="Current-flight-status"></p><br>
+          <p>Arrival Gate</p>
+          <p id="arrival-gate"></p></div>
+
+
+<!-- Modal info -->
         <div class="modal fade" id="flight-tracker-modal" tabindex="-1" aria-labelledby="flight-tracker-modal-label"
           aria-hidden="true">
           <div class="modal-dialog">
@@ -80,45 +86,11 @@
                     <label for="flight-search-input">Flight Number</label>
                     <input type="text" id="flight-search-input" class="form-control my-3" placeholder="search"
                       required />
-                    <label for="departure-search-input">Departure City</label>
-                    <input type="text" id="departure-search-input" class="form-control my-3" placeholder="search"
-                      required />
-                    <label for="arrival-search-input">Arrival City</label>
-                    <input type="text" id="arrival-search-input" class="form-control my-3" placeholder="search"
-                      required />
-
-                    
 
                     <table id="previous_searches" class="table my-3">
                       <label for="previous_searches">Previous Searches</label>
                       <thead>
-                        <tr class="table-info">
-                          <th scope="col">#</th>
-                          <th scope="col">Flight Number</th>
-                          <th scope="col">Departure City</th>
-                          <th scope="col">Arrival City</th>
-
-                        </tr>
-                      </thead>
-                      <tbody id="table-body">
-                        <tr class="table-warning">
-                          <th scope="row">1</th>
-                          <td>123</td>
-                          <td>Huston</td>
-                          <td>Detroit</td>
-                        </tr>
-                        <tr class="table-warning">
-                          <th scope="row">2</th>
-                          <td>456</td>
-                          <td>Denver</td>
-                          <td>New York</td>
-                        </tr>
-                        <tr class="table-warning">
-                          <th scope="row">3</th>
-                          <td>789</td>
-                          <td>Chicago</td>
-                          <td>Seattle</td>
-                        </tr>
+                       
                       </tbody>
                     </table>
 
@@ -152,10 +124,11 @@
     </div>
 
 
+<!-- Departure Weather -->
     <div class="container-lg bg-warning mt-3 weather">
       <div class="row ">
         <div id="departure-weather-header" class="fs-4 text-center">Departure City Weather
-          <p id="Departure-City-Name-Print">Charlotte</p>
+          <p id="Departure-City-Name-Print"></p>
         </div>
 
         <div class="row">
@@ -164,7 +137,9 @@
             <div class="card weather_Card" >
               <img src="./assets/images/Sun.png" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">80°F</p>
+                <p class="card-text" id="departure-day-1-weather-high"></p>
+                <p class="card-text" id="departure-day-1-weather-low"></p>
+                <p class="card-text" id="departure-day-1-weather-uv"></p>
               </div>
             </div>
 
@@ -174,34 +149,42 @@
             <div class="card weather_Card">
               <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">77°F</p>
+                <p class="card-text" id="departure-day-2-weather-high"></p>
+                <p class="card-text" id="departure-day-2-weather-low"></p>
+                <p class="card-text" id="departure-day-2-weather-uv"></p>
               </div>
             </div>
           </div>
           <div id="departure-day-3" class="col col-md-6 col-lg-2 mx-auto my-3">
             Day 3
             <div class="card weather_Card">
-              <img src="./assets/images/sun and rainy clouds.png" class="card-img-top" alt="...">
+              <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">72°F</p>
+                <p class="card-text" id="departure-day-3-weather-high"></p>
+                <p class="card-text" id="departure-day-3-weather-low"></p>
+                <p class="card-text" id="departure-day-3-weather-uv"></p>
               </div>
             </div>
           </div>
           <div id="departure-day-4" class="col-12 col-md-6 col-lg-2 mx-auto my-3">
             Day 4
             <div class="card weather_Card" >
-              <img src="./assets/images/rainy clouds.png" class="card-img-top" alt="...">
+              <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">70°F</p>
+                <p class="card-text" id="departure-day-4-weather-high"></p>
+                <p class="card-text" id="departure-day-4-weather-low"></p>
+                <p class="card-text" id="departure-day-4-weather-uv"></p>
               </div>
             </div>
           </div>
           <div id="departure-day-5" class="col-12 col-md-6 col-lg-2 mx-auto my-3">
             Day 5
             <div class="card weather_Card">
-              <img src="./assets/images/stormy cloud.png" class="card-img-top" alt="...">
+              <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">67°F</p>
+                <p class="card-text" id="departure-day-5-weather-high"></p>
+                <p class="card-text" id="departure-day-5-weather-low"></p>
+                <p class="card-text" id="departure-day-5-weather-uv"></p>
               </div>
             </div>
           </div>
@@ -211,17 +194,21 @@
       </div>
     </div>
 
+
+<!-- Arrival City Weather -->
     <div class="container-lg bg-warning my-3 weather">
       <div class="row">
-        <div id="arrival-weather-header" class="fs-4 text-center">Arrival City Weather<p id="Arrival">Atlanta</p></div>
+        <div id="arrival-weather-header" class="fs-4 text-center">Arrival City Weather<p id="Arrival-City-Name-Print">Atlanta</p></div>
 
         <div class="row">
           <div id="arrival-day-1" class="col-12 col-md-6 col-lg-2 mx-auto my-3">
             Day 1
             <div class="card weather_Card" >
-              <img src="./assets/images/stormy cloud.png" class="card-img-top" alt="...">
+              <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">65°F</p>
+                <p class="card-text" id="arrival-day-1-weather-high"></p>
+                <p class="card-text" id="arrival-day-1-weather-low"></p>
+                <p class="card-text" id="arrival-day-1-weather-uv"></p>
               </div>
             </div>
 
@@ -229,18 +216,22 @@
           <div id="arrival-day-2" class="col-12 col-md-6 col-lg-2 mx-auto my-3">
             Day 2
             <div class="card weather_Card" >
-              <img src="./assets/images/rainy clouds.png" class="card-img-top" alt="...">
+              <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">68°F</p>
+                <p class="card-text" id="arrival-day-2-weather-high"></p>
+                <p class="card-text" id="arrival-day-2-weather-low"></p>
+                <p class="card-text" id="arrival-day-2-weather-uv"></p>
               </div>
             </div>
           </div>
           <div id="arrival-day-3" class="col col-md-6 col-lg-2 mx-auto my-3">
             Day 3
             <div class="card weather_Card" >
-              <img src="./assets/images/sun and rainy clouds.png" class="card-img-top" alt="...">
+              <img src="./assets/images/stormy cloud.png" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">70°F</p>
+                <p class="card-text" id="arrival-day-3-weather-high"></p>
+                <p class="card-text" id="arrival-day-3-weather-low"></p>
+                <p class="card-text" id="arrival-day-3-weather-uv"></p>
               </div>
             </div>
           </div>
@@ -249,7 +240,9 @@
             <div class="card weather_Card" >
               <img src="./assets/images/Sun with clouds.jpg" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">75°F</p>
+                <p class="card-text" id="arrival-day-4-weather-high"></p>
+                <p class="card-text" id="arrival-day-4-weather-low"></p>
+                <p class="card-text" id="arrival-day-4-weather-uv"></p>
               </div>
             </div>
           </div>
@@ -258,7 +251,9 @@
             <div class="card weather_Card" >
               <img src="./assets/images/Sun.png" class="card-img-top" alt="...">
               <div class="card-body">
-                <p class="card-text">80°F</p>
+                <p class="card-text" id="arrival-day-5-weather-high"></p>
+                <p class="card-text" id="arrival-day-5-weather-low"></p>
+                <p class="card-text" id="arrival-day-5-weather-uv"></p>
               </div>
             </div>
           </div>
