@@ -4,8 +4,6 @@
 
 //global var for input values
 var flightInputVal = document.querySelector("#flight-search-input").value;
-// var departureCityVal = document.querySelector("#departure-search-input").value;
-// var arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
 // these Var's are connected to the user input form on the search modal
 var flightNumberSearchEl = document.querySelector("#flight-search-input");
@@ -86,134 +84,68 @@ var arrivalCityWeatherNameEl = document.getElementById(
 );
 
 
-
-
 // Declaring the "search object" so it can be prepared for later use in the API's
 //and for storage/ recall of previous searches
 
-var previousFlights = [''];
+var previousFlightInputs = [];
 
 function searchFormSubmit(event) {
     event.preventDefault()
     var flightInputVal = document.querySelector("#flight-search-input").value;
-    // var departureCityVal = document.querySelector("#departure-search-input").value;
-    // var arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
-    // flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
-    // departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
-    // arrivalCityPrintEl.textContent = "Arrival City:\n" +  arrivalCityVal;
-    // departCityNamePrintEl.textContent = departureCityVal
-    // arrivalCityNamePrintEl.textContent =  arrivalCityVal
 
+     // Add the flight input value to the beginning of the previousFlightInputs array
+     previousFlightInputs.unshift(flightInputVal);
+
+     // Limit the previousFlightInputs array to store only the last three flight input values
+     if (previousFlightInputs.length > 3) {
+         previousFlightInputs.pop();
+     }
+ 
+     // Store the updated previousFlightInputs array in local storage
+     localStorage.setItem("previousFlightInputs", JSON.stringify(previousFlightInputs));
+ 
+     // Call the function to display previous flight inputs
+     displayPreviousFlightInputs();
 
     console.log("tacos");
     console.log(flightInputVal);
-    // console.log(departureCityVal);
-    // console.log(arrivalCityVal);
 
-    // var previousFlightsObj = {
-    //     number: flightInputVal,
-    //     departure: departureCityVal,
-    //     arrival: arrivalCityVal,
-    // };
-
-    // previousFlights.unshift(previousFlightsObj)
-
-    // localStorage.setItem("previousFlights", JSON.stringify(previousFlightsObj))
-    // console.log("tacos")
-    // console.log(previousFlightsObj)
-    // console.log(previousFlights)
-
-
-    // flightNumberSearchEl.textContent = ('')
-    // departureCitySearchEl.textContent = ('')
-    // arrivalCitySearchEl.textContent = ('')
-
-    // fetchDepartures()
-    // fetchArrivals()
-    // geoFetch()
-    // geoFetch2()
     flightFetch()
 
     console.log(flightFetch)
 }
 
-// function retrieveSearch() {
-//     var previousSearch = JSON.parse(localStorage.getItem("previousFlights"));
+//displays the last 3 search inputs
 
-//     if (previousSearch === null) {
-//         previousSearchTableEl.setAttribute('style', "display:none;")
-//     }
+function displayPreviousFlightInputs() {
+    var previousInputs = JSON.parse(localStorage.getItem("previousFlightInputs"));
 
-//     console.log(previousSearch);
-// }
+    // Clear the previous flight input list
+    previousSearchTableEl.innerHTML = "";
 
-// function displayPreviousSearch() {
-//     retrieveSearch();
-//     renderPreviousSearch();
-//     console.log("tacos")
-// }
+    if (previousInputs && previousInputs.length > 0) {
+        // Loop through the previous flight inputs and create list items
+        for (var i = 0; i < previousInputs.length; i++) {
+            var input = previousInputs[i];
+            var listItem = document.createElement("li");
+            listItem.textContent = input;
+            previousSearchTableEl.appendChild(listItem);
+        }
+    } else {
+        // If there are no previous flight inputs, hide the list
+        previousSearchTableEl.style.display = "none";
+    }
+}
 
-
-
-// function renderPreviousSearch() {
-//     // retrieve local storage
-//     // Clear todoList element and update todoCountSpan
-//     previousSearchTableEl.innerHTML = "";
-
-//     var previousFlightsObj = JSON.parse(localStorage.getItem("previousFlightsObj"))
-
-//     if (previousFlightsObj === null) {
-//         previousSearchTableEl.setAttribute('style', "display:none;")
-//     }
-
-//     console.log(previousFlightsObj);
-
-//     // Render a new li for each todo
-//     for (var i = 0; i < 3; i++) {
-//         console.log(previousFlightsObj)
-//         //   var previousFlightsObj = previousFlightsObj[i];
-
-//         // var rowEl = document.createElement('tr')
-//         // rowEl.textContent = i + 1;
-//         // var numberEl = document.createElement('td')
-//         // numberEl.textContent = previousFlightsObj.number;
-//         // console.log(numberEl)
-//         // var departureEl = document.createElement('td')
-//         // departureEl.textContent = previousFlightsObj.departure;
-//         // console.log(departureEl)
-//         // var arrivalEl = document.createElement('td')
-//         // arrivalEl.textContent = previousFlightsObj.arrival;
-//         // console.log(arrivalEl)
+// Call the function to display previous flight inputs when the page loads
+displayPreviousFlightInputs();
 
 
-//         // rowEl.appendChild(numberEl, departureEl, arrivalEl);
-//         // previousSearchTableEl.appendChild(rowEl);
-
-
-
-
-//     }
-// }
-// displayPreviousSearch;
-
-// modalStartBtnEl.addEventListener("click", displayPreviousSearch);
-// modalStartBtnEl.addEventListener("click", retrieveSearch);
-// modalStartBtnEl.addEventListener("click", displayPreviousSearch);
 modalSearchBtnEl.addEventListener("click", searchFormSubmit);
-
-// api's to be used
-//  https://airlabs.co
-//  https://open-meteo.com/
-
-// // Flight API Section********
-
-
 
 
 function flightFetch() {
-
-
 
     var flightInputVal = document.querySelector("#flight-search-input").value;
     var flightRequest = `https://airlabs.co/api/v9/flight?flight_iata=${flightInputVal}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
