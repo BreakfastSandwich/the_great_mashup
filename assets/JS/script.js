@@ -41,22 +41,32 @@ var departureCityWeatherHeaderEl = document.getElementById(
     "departure-weather-header"
 );
 var departCityNamePrintEl = document.getElementById('Departure-City-Print')
-var departWeatherDay1el = document.getElementById("departure-day-1");
-var departWeatherDay2el = document.getElementById("departure-day-2");
-var departWeatherDay3el = document.getElementById("departure-day-3");
-var departWeatherDay4el = document.getElementById("departure-day-4");
-var departWeatherDay5el = document.getElementById("departure-day-5");
+var departWeatherDay1Highel = document.getElementById("departure-day-1-weather-high");
+var departWeatherDay1Lowel = document.getElementById("departure-day-1-weather-low");
+var departWeatherDay1UVel = document.getElementById("departure-day-1-weather-uv");
+var departWeatherDay2Highel = document.getElementById("departure-day-2-weather-high");
+var departWeatherDay2Lowel = document.getElementById("departure-day-2-weather-low");
+var departWeatherDay2UVel = document.getElementById("departure-day-2-weather-uv");
+var departWeatherDay3Highel = document.getElementById("departure-day-3-weather-high");
+var departWeatherDay3Lowel = document.getElementById("departure-day-3-weather-low");
+var departWeatherDay3UVel = document.getElementById("departure-day-3-weather-uv");
+var departWeatherDay4Highel = document.getElementById("departure-day-4-weather-high");
+var departWeatherDay4Lowel = document.getElementById("departure-day-4-weather-low");
+var departWeatherDay4UVel = document.getElementById("departure-day-4-weather-uv");
+var departWeatherDay5Highel = document.getElementById("departure-day-5-weather-high");
+var departWeatherDay5Lowel = document.getElementById("departure-day-5-weather-low");
+var departWeatherDay5UVel = document.getElementById("departure-day-5-weather-uv");
 
 // arrival city weather area
 var arrivalCityWeatherHeaderEl = document.getElementById(
     "arrival-weather-header"
 );
 var arrivalCityNamePrintEl = document.getElementById("arrival-city-print")
-var arrivalWeatherDay1el = document.getElementById("arrival-day-1");
-var arrivalWeatherDay2el = document.getElementById("arrival-day-2");
-var arrivalWeatherDay3el = document.getElementById("arrival-day-3");
-var arrivalWeatherDay4el = document.getElementById("arrival-day-4");
-var arrivalWeatherDay5el = document.getElementById("arrival-day-5");
+var arrivalWeatherDay1el = document.getElementById("arrival-day-1-weather");
+var arrivalWeatherDay2el = document.getElementById("arrival-day-2-weather");
+var arrivalWeatherDay3el = document.getElementById("arrival-day-3-weather");
+var arrivalWeatherDay4el = document.getElementById("arrival-day-4-weather");
+var arrivalWeatherDay5el = document.getElementById("arrival-day-5-weather");
 
 
 // departure city weather area
@@ -77,15 +87,15 @@ var previousFlights = [''];
 
 function searchFormSubmit(event) {
     event.preventDefault()
-   var flightInputVal = document.querySelector("#flight-search-input").value;
-   var departureCityVal = document.querySelector("#departure-search-input").value;
-   var arrivalCityVal = document.querySelector("#arrival-search-input").value;
+    var flightInputVal = document.querySelector("#flight-search-input").value;
+    var departureCityVal = document.querySelector("#departure-search-input").value;
+    var arrivalCityVal = document.querySelector("#arrival-search-input").value;
 
-// flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
-// departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
-// arrivalCityPrintEl.textContent = "Arrival City:\n" +  arrivalCityVal;
-// departCityNamePrintEl.textContent = departureCityVal
-// arrivalCityNamePrintEl.textContent =  arrivalCityVal
+    // flightNumberPrintEl.textContent = "Flight Number:\n" +  flightInputVal;
+    // departureCityPrintEl.textContent = "Departure City:\n" + departureCityVal;
+    // arrivalCityPrintEl.textContent = "Arrival City:\n" +  arrivalCityVal;
+    // departCityNamePrintEl.textContent = departureCityVal
+    // arrivalCityNamePrintEl.textContent =  arrivalCityVal
 
 
     console.log("tacos");
@@ -105,7 +115,7 @@ function searchFormSubmit(event) {
     console.log("tacos")
     console.log(previousFlightsObj)
     console.log(previousFlights)
-    
+
 
     flightNumberSearchEl.textContent = ('')
     departureCitySearchEl.textContent = ('')
@@ -116,7 +126,7 @@ function searchFormSubmit(event) {
     // geoFetch()
     // geoFetch2()
     flightFetch()
-   
+
     console.log(flightFetch)
 }
 
@@ -197,123 +207,133 @@ function flightFetch() {
 
 
 
-var flightInputVal = document.querySelector("#flight-search-input").value;
+    var flightInputVal = document.querySelector("#flight-search-input").value;
     var flightRequest = `https://airlabs.co/api/v9/flight?flight_iata=${flightInputVal}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
-   
+
     fetch(flightRequest)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
             console.log(data);
-    
-        
-        var departureIATA = data.response.dep_iata
-        departureIATAEl.textContent = departureIATA 
-       departureCityWeatherNameEl
-        var departureGate = data.response.dep_gate
-        var departureTime = data.response.dep_time
-        var departureCity = data.response.dep_city
-        var flightIATA = data.response.flight_iata
-        flightNumberPrintEl.textContent = flightIATA
-        var flightstatus = data.response.status
-        currentFlightStatusPrintEl.textContent = flightstatus
-        departureCityPrintEl.textContent = departureCity;
-        departureGatePrintEl.textContent = departureGate
-      
-
-        var arrivalIATA = data.response.arr_iata
-        arrivalIATAEl.textContent = arrivalIATA 
-        var arrivalGate = data.response.arr_gate
-        var arrivalTime = data.response.arr_time
-        var arrivalCity = data.response.arr_city
-        arrivalCityNamePrintEl.textContent = arrivalCity    
-        arrivalGatePrintEl.textContent = arrivalGate
-  
-       
-        
-
-var departureRequest = `https://airlabs.co/api/v9/cities?city_code=${departureIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
-console.log(departureRequest)
-
-fetch(departureRequest)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-
-        var departureLat = data.response[0].lat
-        var departureLng = data.response[0].lng
-        console.log(departureLat)
-        console.log(departureLng)
-
-            var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
-
-    fetch(requestUrl2)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-            var departureDay1tempHigh = data.daily.temperature_2m_max[0]
-
-            var departureDay2tempHigh = data.daily.temperature_2m_max[1]
-
-            var departureDay3tempHigh = data.daily.temperature_2m_max[2]
-
-            var departureDay4tempHigh = data.daily.temperature_2m_max[3]
-
-            var departureDay5tempHigh = data.daily.temperature_2m_max[4]
 
 
+            var departureIATA = data.response.dep_iata
+            departureIATAEl.textContent = departureIATA            
+            var departureGate = data.response.dep_gate
+            var departureTime = data.response.dep_time
+            var departureCity = data.response.dep_city
+            departureCityWeatherNameEl.textContent = departureCity
+            var flightIATA = data.response.flight_iata
+            flightNumberPrintEl.textContent = flightIATA
+            var flightstatus = data.response.status
+            currentFlightStatusPrintEl.textContent = flightstatus
+            departureCityPrintEl.textContent = departureCity;
+            departureGatePrintEl.textContent = departureGate
 
-            var departureDay1tempLow = data.daily.temperature_2m_min[0]
 
-            var departureDay2tempLow = data.daily.temperature_2m_min[1]
-
-            var departureDay3tempLow = data.daily.temperature_2m_min[2]
-
-            var departureDay4tempLow = data.daily.temperature_2m_min[3]
-
-            var departureDay5tempLow = data.daily.temperature_2m_min[4]
+            var arrivalIATA = data.response.arr_iata
+            arrivalIATAEl.textContent = arrivalIATA
+            var arrivalGate = data.response.arr_gate
+            var arrivalTime = data.response.arr_time
+            var arrivalCity = data.response.arr_city
+            arrivalCityNamePrintEl.textContent = arrivalCity
+            arrivalGatePrintEl.textContent = arrivalGate
 
 
 
 
+            var departureRequest = `https://airlabs.co/api/v9/cities?city_code=${departureIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
+            console.log(departureRequest)
+
+            fetch(departureRequest)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+
+                    var departureLat = data.response[0].lat
+                    var departureLng = data.response[0].lng
+                    console.log(departureLat)
+                    console.log(departureLng)
+
+                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
+
+                    fetch(requestUrl2)
+                        .then(function (response) {
+                            return response.json();
+                        })
+                        .then(function (data) {
+                            console.log(data);
+                            var departureDay1tempHigh = data.daily.temperature_2m_max[0]
+                            var departureDay1tempLow = data.daily.temperature_2m_min[0]
+                            var departureDay1UVIndex = data.daily.uv_index_max[0]
+                            departWeatherDay1Highel.textContent = "High: " + departureDay1tempHigh+ "°F\n"
+                            departWeatherDay1Lowel.textContent = "Low: " + departureDay1tempLow + "°F\n"
+                            departWeatherDay1UVel.textContent = "UV Index: " + departureDay1UVIndex
+
+                            var departureDay2tempHigh = data.daily.temperature_2m_max[1]
+                            var departureDay2tempLow = data.daily.temperature_2m_min[1]
+                            var departureDay2UVIndex = data.daily.uv_index_max[1]
+                            departWeatherDay2Highel.textContent = "High: " + departureDay2tempHigh+ "°F\n"
+                            departWeatherDay2Lowel.textContent = "Low: " + departureDay2tempLow + "°F\n"
+                            departWeatherDay2UVel.textContent = "UV Index: " + departureDay2UVIndex
 
 
+                            var departureDay3tempHigh = data.daily.temperature_2m_max[2]
+                            var departureDay3tempLow = data.daily.temperature_2m_min[2]
+                            var departureDay3UVIndex = data.daily.uv_index_max[2]
+                            departWeatherDay3Highel.textContent = "High: " + departureDay3tempHigh+ "°F\n"
+                            departWeatherDay3Lowel.textContent = "Low: " + departureDay3tempLow + "°F\n"
+                            departWeatherDay3UVel.textContent = "UV Index: " + departureDay3UVIndex
 
-            console.log(departureDay1tempHigh)
 
-            
+                            var departureDay4tempHigh = data.daily.temperature_2m_max[3]
+                            var departureDay4tempLow = data.daily.temperature_2m_min[3]
+                            var departureDay4UVIndex = data.daily.uv_index_max[3]
+                            departWeatherDay4Highel.textContent = "High: " + departureDay4tempHigh+ "°F\n"
+                            departWeatherDay4Lowel.textContent = "Low: " + departureDay4tempLow + "°F\n"
+                            departWeatherDay4UVel.textContent = "UV Index: " + departureDay4UVIndex
+
+                            var departureDay5tempHigh = data.daily.temperature_2m_max[4]
+                            var departureDay5tempHigh = data.daily.temperature_2m_max[4]
+                            var departureDay5tempLow = data.daily.temperature_2m_min[4]
+                            var departureDay5UVIndex = data.daily.uv_index_max[4]
+                            departWeatherDay5Highel.textContent = "High: " + departureDay5tempHigh+ "°F\n"
+                            departWeatherDay5Lowel.textContent = "Low: " + departureDay5tempLow + "°F\n"
+                            departWeatherDay5UVel.textContent = "UV Index: " + departureDay5UVIndex
+
+                            console.log(departureDay1tempHigh)
+
+
+                        });
+
+
+                    return
+                })
+
+
+            var arrivalRequest = `https://airlabs.co/api/v9/cities?city_code=${arrivalIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
+            console.log(arrivalIATA)
+            console.log(arrivalRequest)
+
+            fetch(arrivalRequest)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    console.log(data);
+
+
+                    // var arrivalLat = data.response[0].lat
+                    // var arrivalLng = data.response[0].lng
+                    // console.log(arrivalLat)
+                    // console.log(arrivalLng)
+                    return
+
+                })
+
+
         });
-
-
-        return
-})
-
-
-var arrivalRequest = `https://airlabs.co/api/v9/cities?city_code=${arrivalIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
-    console.log(arrivalIATA)
-    console.log(arrivalRequest)
-
-fetch(arrivalRequest)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) {
-        console.log(data);
-
-
-        // var arrivalLat = data.response[0].lat
-        // var arrivalLng = data.response[0].lng
-        // console.log(arrivalLat)
-        // console.log(arrivalLng)
-        return
-
-})   
-
-      
-});
 }

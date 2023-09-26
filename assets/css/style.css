@@ -80,7 +80,7 @@ font-size: 1.4rem;
 
 .weather_Card {
     background-color: rgb(220, 228, 233);
-    height: 15rem;
+    height: 20rem;
     flex: 0 1 12rem;
     gap: 1rem;
    
