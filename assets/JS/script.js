@@ -117,19 +117,19 @@ function searchFormSubmit(event) {
     var flightInputVal = document.querySelector("#flight-search-input").value;
 
 
-     // Add the flight input value to the beginning of the previousFlightInputs array
-     previousFlightInputs.unshift(flightInputVal);
+    // Add the flight input value to the beginning of the previousFlightInputs array
+    previousFlightInputs.unshift(flightInputVal);
 
-     // Limit the previousFlightInputs array to store only the last three flight input values
-     if (previousFlightInputs.length > 3) {
-         previousFlightInputs.pop();
-     }
- 
-     // Store the updated previousFlightInputs array in local storage
-     localStorage.setItem("previousFlightInputs", JSON.stringify(previousFlightInputs));
- 
-     // Call the function to display previous flight inputs
-     displayPreviousFlightInputs();
+    // Limit the previousFlightInputs array to store only the last three flight input values
+    if (previousFlightInputs.length > 3) {
+        previousFlightInputs.pop();
+    }
+
+    // Store the updated previousFlightInputs array in local storage
+    localStorage.setItem("previousFlightInputs", JSON.stringify(previousFlightInputs));
+
+    // Call the function to display previous flight inputs
+    displayPreviousFlightInputs();
 
     console.log("tacos");
     console.log(flightInputVal);
@@ -206,147 +206,169 @@ function flightFetch() {
 
 
 
-
-            var departureRequest = `https://airlabs.co/api/v9/cities?city_code=${departureIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
-            console.log(departureRequest)
-
-            fetch(departureRequest)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log(data);
-
-                    var departureLat = data.response[0].lat
-                    var departureLng = data.response[0].lng
-                    console.log(departureLat)
-                    console.log(departureLng)
-
-                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
-
-                    fetch(requestUrl2)
-                        .then(function (response) {
-                            return response.json();
-                        })
-                        .then(function (data) {
-                            console.log(data);
-                            var departuretempHigh = data.daily.temperature_2m_max
-                            var departuretempLow = data.daily.temperature_2m_min
-                            var departureUVIndex = data.daily.uv_index_max
-                            var departurePercip = data.daily.precipitation_probability_max
-
-
-                            departWeatherDay1Highel.textContent = "High: " + departuretempHigh[0] + "°F\n"
-                            departWeatherDay1Lowel.textContent = "Low: " + departuretempLow[0] + "°F\n"
-                            departWeatherDay1UVel.textContent = "UV Index: " + departureUVIndex[0]
-                            departWeatherDay1Percipel.textContent = "Rain Chance: " + departurePercip[0] + "%"
-
-                            
-                            departWeatherDay2Highel.textContent = "High: " + departuretempHigh[1] + "°F\n"
-                            departWeatherDay2Lowel.textContent = "Low: " + departuretempLow[1] + "°F\n"
-                            departWeatherDay2UVel.textContent = "UV Index: " + departureUVIndex[1]
-                            departWeatherDay2Percipel.textContent = "Rain Chance: " + departurePercip[1] + "%"
-
-                          
-                            departWeatherDay3Highel.textContent = "High: " + departuretempHigh[2] + "°F\n"
-                            departWeatherDay3Lowel.textContent = "Low: " + departuretempLow[2] + "°F\n"
-                            departWeatherDay3UVel.textContent = "UV Index: " + departureUVIndex[2]
-                            departWeatherDay3Percipel.textContent = "Rain Chance: " + departurePercip[2] + "%"
-
-
-                          
-                            departWeatherDay4Highel.textContent = "High: " + departuretempHigh[3] + "°F\n"
-                            departWeatherDay4Lowel.textContent = "Low: " + departuretempLow[3] + "°F\n"
-                            departWeatherDay4UVel.textContent = "UV Index: " + departureUVIndex[3]
-                            departWeatherDay4Percipel.textContent = "Rain Chance: " + departurePercip[3] + "%"
-
-                           
-                            departWeatherDay5Highel.textContent = "High: " + departuretempHigh[4] + "°F\n"
-                            departWeatherDay5Lowel.textContent = "Low: " + departuretempLow[4] + "°F\n"
-                            departWeatherDay5UVel.textContent = "UV Index: " + departureUVIndex[4]
-                            departWeatherDay5Percipel.textContent = "Rain Chance: " + departurePercip[4] + "%"
-
-                           
-
-
-                        });
-
-
-                    return
-                })
-
-
-            var arrivalRequest = `https://airlabs.co/api/v9/cities?city_code=${arrivalIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
-
-            console.log(arrivalIATA)
-            console.log(arrivalRequest)
-
-            fetch(arrivalRequest)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    console.log(data);
-
-
-                    var arrivalLat = data.response[0].lat
-                    var arrivalLng = data.response[0].lng
-                    console.log(arrivalLat)
-                    console.log(arrivalLng)
-
-                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${arrivalLat}&longitude=${arrivalLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
-
-                    fetch(requestUrl2)
-                        .then(function (response) {
-                            return response.json();
-                        })
-                        .then(function (data) {
-                            console.log(data);
-                            var arrivaltempHigh = data.daily.temperature_2m_max
-                            var arrivaltempLow = data.daily.temperature_2m_min
-                            var arrivalUVIndex = data.daily.uv_index_max
-                            var arrivalPercip = data.daily.precipitation_probability_max
-
-
-
-                            arrivalWeatherDay1Highel.textContent = "High: " + arrivaltempHigh[0] + "°F\n"
-                            arrivalWeatherDay1Lowel.textContent = "Low: " + arrivaltempLow[0] + "°F\n"
-                            arrivalWeatherDay1UVel.textContent = "UV Index: " + arrivalUVIndex[0]
-                            arrivalWeatherDay1Percipel.textContent = "Rain Chance: " + arrivalPercip[0] + "%"
-
-                           
-                            arrivalWeatherDay2Highel.textContent = "High: " + arrivaltempHigh[1] + "°F\n"
-                            arrivalWeatherDay2Lowel.textContent = "Low: " + arrivaltempLow[1] + "°F\n"
-                            arrivalWeatherDay2UVel.textContent = "UV Index: " + arrivalUVIndex[1]
-                            arrivalWeatherDay2Percipel.textContent = "Rain Chance: " + arrivalPercip[1] + "%"
-
-
-                           
-                            arrivalWeatherDay3Highel.textContent = "High: " + arrivaltempHigh[2] + "°F\n"
-                            arrivalWeatherDay3Lowel.textContent = "Low: " + arrivaltempLow[2] + "°F\n"
-                            arrivalWeatherDay3UVel.textContent = "UV Index: " + arrivalUVIndex[2]
-                            arrivalWeatherDay3Percipel.textContent = "Rain Chance: " + arrivalPercip[2] + "%"
-
-                            
-                            arrivalWeatherDay4Highel.textContent = "High: " + arrivaltempHigh[3] + "°F\n"
-                            arrivalWeatherDay4Lowel.textContent = "Low: " + arrivaltempLow[3]+ "°F\n"
-                            arrivalWeatherDay4UVel.textContent = "UV Index: " + arrivalUVIndex[3]
-                            arrivalWeatherDay4Percipel.textContent = "Rain Chance: " + arrivalPercip[3] + "%"
-
-                            
-                            arrivalWeatherDay5Highel.textContent = "High: " + arrivaltempHigh[4] + "°F\n"
-                            arrivalWeatherDay5Lowel.textContent = "Low: " + arrivaltempLow[4] + "°F\n"
-                            arrivalWeatherDay5UVel.textContent = "UV Index: " + arrivalUVIndex[4]
-                            arrivalWeatherDay5Percipel.textContent = "Rain Chance: " + arrivalPercip[4] + "%"
-
-                            
-
-
-                        });
-
-
-                    return
-                })
+            departureLocation(departureIATA)
+            arrivalLocation(arrivalIATA)
 
         });
+}
+
+
+function departureLocation(departureIATA) {
+    var departureRequest = `https://airlabs.co/api/v9/cities?city_code=${departureIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
+    console.log(departureRequest)
+
+    fetch(departureRequest)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+
+            var departureLat = data.response[0].lat
+            var departureLng = data.response[0].lng
+            console.log(departureLat)
+            console.log(departureLng)
+
+
+            departureWeather(departureLat, departureLng)
+            return
+        })
+}
+
+
+
+
+function departureWeather(departureLat, departureLng) {
+    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
+
+    fetch(requestUrl2)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            var departuretempHigh = data.daily.temperature_2m_max
+            var departuretempLow = data.daily.temperature_2m_min
+            var departureUVIndex = data.daily.uv_index_max
+            var departurePercip = data.daily.precipitation_probability_max
+
+
+            departWeatherDay1Highel.textContent = "High: " + departuretempHigh[0] + "°F\n"
+            departWeatherDay1Lowel.textContent = "Low: " + departuretempLow[0] + "°F\n"
+            departWeatherDay1UVel.textContent = "UV Index: " + departureUVIndex[0]
+            departWeatherDay1Percipel.textContent = "Rain Chance: " + departurePercip[0] + "%"
+
+
+            departWeatherDay2Highel.textContent = "High: " + departuretempHigh[1] + "°F\n"
+            departWeatherDay2Lowel.textContent = "Low: " + departuretempLow[1] + "°F\n"
+            departWeatherDay2UVel.textContent = "UV Index: " + departureUVIndex[1]
+            departWeatherDay2Percipel.textContent = "Rain Chance: " + departurePercip[1] + "%"
+
+
+            departWeatherDay3Highel.textContent = "High: " + departuretempHigh[2] + "°F\n"
+            departWeatherDay3Lowel.textContent = "Low: " + departuretempLow[2] + "°F\n"
+            departWeatherDay3UVel.textContent = "UV Index: " + departureUVIndex[2]
+            departWeatherDay3Percipel.textContent = "Rain Chance: " + departurePercip[2] + "%"
+
+
+
+            departWeatherDay4Highel.textContent = "High: " + departuretempHigh[3] + "°F\n"
+            departWeatherDay4Lowel.textContent = "Low: " + departuretempLow[3] + "°F\n"
+            departWeatherDay4UVel.textContent = "UV Index: " + departureUVIndex[3]
+            departWeatherDay4Percipel.textContent = "Rain Chance: " + departurePercip[3] + "%"
+
+
+            departWeatherDay5Highel.textContent = "High: " + departuretempHigh[4] + "°F\n"
+            departWeatherDay5Lowel.textContent = "Low: " + departuretempLow[4] + "°F\n"
+            departWeatherDay5UVel.textContent = "UV Index: " + departureUVIndex[4]
+            departWeatherDay5Percipel.textContent = "Rain Chance: " + departurePercip[4] + "%"
+
+
+
+
+        });
+}
+
+
+function arrivalLocation(arrivalIATA) {
+    var arrivalRequest = `https://airlabs.co/api/v9/cities?city_code=${arrivalIATA}&api_key=035b966b-2063-4785-bf81-c2d76bf2f0f0`
+
+    console.log(arrivalIATA)
+    console.log(arrivalRequest)
+
+    fetch(arrivalRequest)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+
+
+            var arrivalLat = data.response[0].lat
+            var arrivalLng = data.response[0].lng
+            console.log(arrivalLat)
+            console.log(arrivalLng)
+
+            arrivalWeather(arrivalLat, arrivalLng)
+
+
+            return
+        })
+}
+
+
+
+function arrivalWeather(arrivalLat, arrivalLng) {
+
+
+    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${arrivalLat}&longitude=${arrivalLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
+
+    fetch(requestUrl2)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            var arrivaltempHigh = data.daily.temperature_2m_max
+            var arrivaltempLow = data.daily.temperature_2m_min
+            var arrivalUVIndex = data.daily.uv_index_max
+            var arrivalPercip = data.daily.precipitation_probability_max
+
+
+
+            arrivalWeatherDay1Highel.textContent = "High: " + arrivaltempHigh[0] + "°F\n"
+            arrivalWeatherDay1Lowel.textContent = "Low: " + arrivaltempLow[0] + "°F\n"
+            arrivalWeatherDay1UVel.textContent = "UV Index: " + arrivalUVIndex[0]
+            arrivalWeatherDay1Percipel.textContent = "Rain Chance: " + arrivalPercip[0] + "%"
+
+
+            arrivalWeatherDay2Highel.textContent = "High: " + arrivaltempHigh[1] + "°F\n"
+            arrivalWeatherDay2Lowel.textContent = "Low: " + arrivaltempLow[1] + "°F\n"
+            arrivalWeatherDay2UVel.textContent = "UV Index: " + arrivalUVIndex[1]
+            arrivalWeatherDay2Percipel.textContent = "Rain Chance: " + arrivalPercip[1] + "%"
+
+
+
+            arrivalWeatherDay3Highel.textContent = "High: " + arrivaltempHigh[2] + "°F\n"
+            arrivalWeatherDay3Lowel.textContent = "Low: " + arrivaltempLow[2] + "°F\n"
+            arrivalWeatherDay3UVel.textContent = "UV Index: " + arrivalUVIndex[2]
+            arrivalWeatherDay3Percipel.textContent = "Rain Chance: " + arrivalPercip[2] + "%"
+
+
+            arrivalWeatherDay4Highel.textContent = "High: " + arrivaltempHigh[3] + "°F\n"
+            arrivalWeatherDay4Lowel.textContent = "Low: " + arrivaltempLow[3] + "°F\n"
+            arrivalWeatherDay4UVel.textContent = "UV Index: " + arrivalUVIndex[3]
+            arrivalWeatherDay4Percipel.textContent = "Rain Chance: " + arrivalPercip[3] + "%"
+
+
+            arrivalWeatherDay5Highel.textContent = "High: " + arrivaltempHigh[4] + "°F\n"
+            arrivalWeatherDay5Lowel.textContent = "Low: " + arrivaltempLow[4] + "°F\n"
+            arrivalWeatherDay5UVel.textContent = "UV Index: " + arrivalUVIndex[4]
+            arrivalWeatherDay5Percipel.textContent = "Rain Chance: " + arrivalPercip[4] + "%"
+
+
+
+
+        });
+
 }
