@@ -84,22 +84,22 @@ var arrivalWeatherDay1Percipel = document.getElementById("arrival-day-1-weather-
 var arrivalWeatherDay2Highel = document.getElementById("arrival-day-2-weather-high");
 var arrivalWeatherDay2Lowel = document.getElementById("arrival-day-2-weather-low");
 var arrivalWeatherDay2UVel = document.getElementById("arrival-day-2-weather-uv");
-var arrivalWeatherDay2Percipel = document.getElementById("arrival-day-1-weather-rain")
+var arrivalWeatherDay2Percipel = document.getElementById("arrival-day-2-weather-rain")
 
 var arrivalWeatherDay3Highel = document.getElementById("arrival-day-3-weather-high");
 var arrivalWeatherDay3Lowel = document.getElementById("arrival-day-3-weather-low");
 var arrivalWeatherDay3UVel = document.getElementById("arrival-day-3-weather-uv");
-var arrivalWeatherDay3Percipel = document.getElementById("arrival-day-1-weather-rain")
+var arrivalWeatherDay3Percipel = document.getElementById("arrival-day-3-weather-rain")
 
 var arrivalWeatherDay4Highel = document.getElementById("arrival-day-4-weather-high");
 var arrivalWeatherDay4Lowel = document.getElementById("arrival-day-4-weather-low");
 var arrivalWeatherDay4UVel = document.getElementById("arrival-day-4-weather-uv");
-var arrivalWeatherDay4Percipel = document.getElementById("arrival-day-1-weather-rain")
+var arrivalWeatherDay4Percipel = document.getElementById("arrival-day-4-weather-rain")
 
 var arrivalWeatherDay5Highel = document.getElementById("arrival-day-5-weather-high");
 var arrivalWeatherDay5Lowel = document.getElementById("arrival-day-5-weather-low");
 var arrivalWeatherDay5UVel = document.getElementById("arrival-day-5-weather-uv");
-var arrivalWeatherDay5Percipel = document.getElementById("arrival-day-1-weather-rain")
+var arrivalWeatherDay5Percipel = document.getElementById("arrival-day-5-weather-rain")
 
 
 // departure city weather area
@@ -266,7 +266,7 @@ function flightFetch() {
                             departWeatherDay5UVel.textContent = "UV Index: " + departureUVIndex[4]
                             departWeatherDay5Percipel.textContent = "Rain Chance: " + departurePercip[4] + "%"
 
-                            console.log(departureDay1tempHigh)
+                           
 
 
                         });
@@ -339,7 +339,7 @@ function flightFetch() {
                             arrivalWeatherDay5UVel.textContent = "UV Index: " + arrivalUVIndex[4]
                             arrivalWeatherDay5Percipel.textContent = "Rain Chance: " + arrivalPercip[4] + "%"
 
-                            console.log(arrivalDay1tempHigh)
+                            
 
 
                         });
