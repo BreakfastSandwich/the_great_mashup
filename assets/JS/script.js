@@ -179,6 +179,7 @@ function flightFetch() {
             var arrivalCity = data.response.arr_city
             arrivalCityNamePrintEl.textContent = arrivalCity
             arrivalGatePrintEl.textContent = arrivalGate
+            arrivalCityWeatherNameEl.textContent = arrivalCity
 
 
 
