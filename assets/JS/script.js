@@ -35,53 +35,76 @@ var arrivalGatePrintEl = document.getElementById("arrival-gate")
 var departureCityWeatherHeaderEl = document.getElementById(
     "departure-weather-header"
 );
+var departureCityWeatherNameEl = document.getElementById(
+    "Departure-City-Name-Print"
+);
 var departCityNamePrintEl = document.getElementById('Departure-City-Print')
+
+
 var departWeatherDay1Highel = document.getElementById("departure-day-1-weather-high");
 var departWeatherDay1Lowel = document.getElementById("departure-day-1-weather-low");
 var departWeatherDay1UVel = document.getElementById("departure-day-1-weather-uv");
+var departWeatherDay1Percipel = document.getElementById("departure-day-1-weather-rain")
+
 var departWeatherDay2Highel = document.getElementById("departure-day-2-weather-high");
 var departWeatherDay2Lowel = document.getElementById("departure-day-2-weather-low");
 var departWeatherDay2UVel = document.getElementById("departure-day-2-weather-uv");
+var departWeatherDay2Percipel = document.getElementById("departure-day-2-weather-rain")
+
 var departWeatherDay3Highel = document.getElementById("departure-day-3-weather-high");
 var departWeatherDay3Lowel = document.getElementById("departure-day-3-weather-low");
 var departWeatherDay3UVel = document.getElementById("departure-day-3-weather-uv");
+var departWeatherDay3Percipel = document.getElementById("departure-day-3-weather-rain")
+
 var departWeatherDay4Highel = document.getElementById("departure-day-4-weather-high");
 var departWeatherDay4Lowel = document.getElementById("departure-day-4-weather-low");
 var departWeatherDay4UVel = document.getElementById("departure-day-4-weather-uv");
+var departWeatherDay4Percipel = document.getElementById("departure-day-4-weather-rain")
+
 var departWeatherDay5Highel = document.getElementById("departure-day-5-weather-high");
 var departWeatherDay5Lowel = document.getElementById("departure-day-5-weather-low");
 var departWeatherDay5UVel = document.getElementById("departure-day-5-weather-uv");
+var departWeatherDay5Percipel = document.getElementById("departure-day-5-weather-rain")
 
 // arrival city weather area
 var arrivalCityWeatherHeaderEl = document.getElementById(
     "arrival-weather-header"
 );
 var arrivalCityNamePrintEl = document.getElementById("arrival-city-print")
+var arrivalCityWeatherNameEl = document.getElementById(
+    "Arrival-City-Name-Print"
+);
+
 var arrivalWeatherDay1el = document.getElementById("arrival-day-1-weather");
 var arrivalWeatherDay1Highel = document.getElementById("arrival-day-1-weather-high");
 var arrivalWeatherDay1Lowel = document.getElementById("arrival-day-1-weather-low");
 var arrivalWeatherDay1UVel = document.getElementById("arrival-day-1-weather-uv");
+var arrivalWeatherDay1Percipel = document.getElementById("arrival-day-1-weather-rain")
+
 var arrivalWeatherDay2Highel = document.getElementById("arrival-day-2-weather-high");
 var arrivalWeatherDay2Lowel = document.getElementById("arrival-day-2-weather-low");
 var arrivalWeatherDay2UVel = document.getElementById("arrival-day-2-weather-uv");
+var arrivalWeatherDay2Percipel = document.getElementById("arrival-day-1-weather-rain")
+
 var arrivalWeatherDay3Highel = document.getElementById("arrival-day-3-weather-high");
 var arrivalWeatherDay3Lowel = document.getElementById("arrival-day-3-weather-low");
 var arrivalWeatherDay3UVel = document.getElementById("arrival-day-3-weather-uv");
+var arrivalWeatherDay3Percipel = document.getElementById("arrival-day-1-weather-rain")
+
 var arrivalWeatherDay4Highel = document.getElementById("arrival-day-4-weather-high");
 var arrivalWeatherDay4Lowel = document.getElementById("arrival-day-4-weather-low");
 var arrivalWeatherDay4UVel = document.getElementById("arrival-day-4-weather-uv");
+var arrivalWeatherDay4Percipel = document.getElementById("arrival-day-1-weather-rain")
+
 var arrivalWeatherDay5Highel = document.getElementById("arrival-day-5-weather-high");
 var arrivalWeatherDay5Lowel = document.getElementById("arrival-day-5-weather-low");
 var arrivalWeatherDay5UVel = document.getElementById("arrival-day-5-weather-uv");
+var arrivalWeatherDay5Percipel = document.getElementById("arrival-day-1-weather-rain")
 
 
 // departure city weather area
-var departureCityWeatherNameEl = document.getElementById(
-    "Departure-City-Name-Print"
-);
-var arrivalCityWeatherNameEl = document.getElementById(
-    "Arrival-City-Name-Print"
-);
+
+
 
 
 // Declaring the "search object" so it can be prepared for later use in the API's
@@ -199,7 +222,7 @@ function flightFetch() {
                     console.log(departureLat)
                     console.log(departureLng)
 
-                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
+                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${departureLat}&longitude=${departureLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
 
                     fetch(requestUrl2)
                         .then(function (response) {
@@ -207,43 +230,41 @@ function flightFetch() {
                         })
                         .then(function (data) {
                             console.log(data);
-                            var departureDay1tempHigh = data.daily.temperature_2m_max[0]
-                            var departureDay1tempLow = data.daily.temperature_2m_min[0]
-                            var departureDay1UVIndex = data.daily.uv_index_max[0]
-                            departWeatherDay1Highel.textContent = "High: " + departureDay1tempHigh + "°F\n"
-                            departWeatherDay1Lowel.textContent = "Low: " + departureDay1tempLow + "°F\n"
-                            departWeatherDay1UVel.textContent = "UV Index: " + departureDay1UVIndex
-
-                            var departureDay2tempHigh = data.daily.temperature_2m_max[1]
-                            var departureDay2tempLow = data.daily.temperature_2m_min[1]
-                            var departureDay2UVIndex = data.daily.uv_index_max[1]
-                            departWeatherDay2Highel.textContent = "High: " + departureDay2tempHigh + "°F\n"
-                            departWeatherDay2Lowel.textContent = "Low: " + departureDay2tempLow + "°F\n"
-                            departWeatherDay2UVel.textContent = "UV Index: " + departureDay2UVIndex
+                            var departuretempHigh = data.daily.temperature_2m_max
+                            var departuretempLow = data.daily.temperature_2m_min
+                            var departureUVIndex = data.daily.uv_index_max
+                            var departurePercip = data.daily.precipitation_probability_max
 
 
-                            var departureDay3tempHigh = data.daily.temperature_2m_max[2]
-                            var departureDay3tempLow = data.daily.temperature_2m_min[2]
-                            var departureDay3UVIndex = data.daily.uv_index_max[2]
-                            departWeatherDay3Highel.textContent = "High: " + departureDay3tempHigh + "°F\n"
-                            departWeatherDay3Lowel.textContent = "Low: " + departureDay3tempLow + "°F\n"
-                            departWeatherDay3UVel.textContent = "UV Index: " + departureDay3UVIndex
+                            departWeatherDay1Highel.textContent = "High: " + departuretempHigh[0] + "°F\n"
+                            departWeatherDay1Lowel.textContent = "Low: " + departuretempLow[0] + "°F\n"
+                            departWeatherDay1UVel.textContent = "UV Index: " + departureUVIndex[0]
+                            departWeatherDay1Percipel.textContent = "Rain Chance: " + departurePercip[0] + "%"
+
+                            
+                            departWeatherDay2Highel.textContent = "High: " + departuretempHigh[1] + "°F\n"
+                            departWeatherDay2Lowel.textContent = "Low: " + departuretempLow[1] + "°F\n"
+                            departWeatherDay2UVel.textContent = "UV Index: " + departureUVIndex[1]
+                            departWeatherDay2Percipel.textContent = "Rain Chance: " + departurePercip[1] + "%"
+
+                          
+                            departWeatherDay3Highel.textContent = "High: " + departuretempHigh[2] + "°F\n"
+                            departWeatherDay3Lowel.textContent = "Low: " + departuretempLow[2] + "°F\n"
+                            departWeatherDay3UVel.textContent = "UV Index: " + departureUVIndex[2]
+                            departWeatherDay3Percipel.textContent = "Rain Chance: " + departurePercip[2] + "%"
 
 
-                            var departureDay4tempHigh = data.daily.temperature_2m_max[3]
-                            var departureDay4tempLow = data.daily.temperature_2m_min[3]
-                            var departureDay4UVIndex = data.daily.uv_index_max[3]
-                            departWeatherDay4Highel.textContent = "High: " + departureDay4tempHigh + "°F\n"
-                            departWeatherDay4Lowel.textContent = "Low: " + departureDay4tempLow + "°F\n"
-                            departWeatherDay4UVel.textContent = "UV Index: " + departureDay4UVIndex
+                          
+                            departWeatherDay4Highel.textContent = "High: " + departuretempHigh[3] + "°F\n"
+                            departWeatherDay4Lowel.textContent = "Low: " + departuretempLow[3] + "°F\n"
+                            departWeatherDay4UVel.textContent = "UV Index: " + departureUVIndex[3]
+                            departWeatherDay4Percipel.textContent = "Rain Chance: " + departurePercip[3] + "%"
 
-                            var departureDay5tempHigh = data.daily.temperature_2m_max[4]
-                            var departureDay5tempHigh = data.daily.temperature_2m_max[4]
-                            var departureDay5tempLow = data.daily.temperature_2m_min[4]
-                            var departureDay5UVIndex = data.daily.uv_index_max[4]
-                            departWeatherDay5Highel.textContent = "High: " + departureDay5tempHigh + "°F\n"
-                            departWeatherDay5Lowel.textContent = "Low: " + departureDay5tempLow + "°F\n"
-                            departWeatherDay5UVel.textContent = "UV Index: " + departureDay5UVIndex
+                           
+                            departWeatherDay5Highel.textContent = "High: " + departuretempHigh[4] + "°F\n"
+                            departWeatherDay5Lowel.textContent = "Low: " + departuretempLow[4] + "°F\n"
+                            departWeatherDay5UVel.textContent = "UV Index: " + departureUVIndex[4]
+                            departWeatherDay5Percipel.textContent = "Rain Chance: " + departurePercip[4] + "%"
 
                             console.log(departureDay1tempHigh)
 
@@ -273,7 +294,7 @@ function flightFetch() {
                     console.log(arrivalLat)
                     console.log(arrivalLng)
 
-                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${arrivalLat}&longitude=${arrivalLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
+                    var requestUrl2 = `https://api.open-meteo.com/v1/forecast?latitude=${arrivalLat}&longitude=${arrivalLng}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset,uv_index_max&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timeformat=unixtime&timezone=America%2FNew_York`;
 
                     fetch(requestUrl2)
                         .then(function (response) {
@@ -281,43 +302,42 @@ function flightFetch() {
                         })
                         .then(function (data) {
                             console.log(data);
-                            var arrivalDay1tempHigh = data.daily.temperature_2m_max[0]
-                            var arrivalDay1tempLow = data.daily.temperature_2m_min[0]
-                            var arrivalDay1UVIndex = data.daily.uv_index_max[0]
-                            arrivalWeatherDay1Highel.textContent = "High: " + arrivalDay1tempHigh + "°F\n"
-                            arrivalWeatherDay1Lowel.textContent = "Low: " + arrivalDay1tempLow + "°F\n"
-                            arrivalWeatherDay1UVel.textContent = "UV Index: " + arrivalDay1UVIndex
-
-                            var arrivalDay2tempHigh = data.daily.temperature_2m_max[1]
-                            var arrivalDay2tempLow = data.daily.temperature_2m_min[1]
-                            var arrivalDay2UVIndex = data.daily.uv_index_max[1]
-                            arrivalWeatherDay2Highel.textContent = "High: " + arrivalDay2tempHigh + "°F\n"
-                            arrivalWeatherDay2Lowel.textContent = "Low: " + arrivalDay2tempLow + "°F\n"
-                            arrivalWeatherDay2UVel.textContent = "UV Index: " + arrivalDay2UVIndex
+                            var arrivaltempHigh = data.daily.temperature_2m_max
+                            var arrivaltempLow = data.daily.temperature_2m_min
+                            var arrivalUVIndex = data.daily.uv_index_max
+                            var arrivalPercip = data.daily.precipitation_probability_max
 
 
-                            var arrivalDay3tempHigh = data.daily.temperature_2m_max[2]
-                            var arrivalDay3tempLow = data.daily.temperature_2m_min[2]
-                            var arrivalDay3UVIndex = data.daily.uv_index_max[2]
-                            arrivalWeatherDay3Highel.textContent = "High: " + arrivalDay3tempHigh + "°F\n"
-                            arrivalWeatherDay3Lowel.textContent = "Low: " + arrivalDay3tempLow + "°F\n"
-                            arrivalWeatherDay3UVel.textContent = "UV Index: " + arrivalDay3UVIndex
+
+                            arrivalWeatherDay1Highel.textContent = "High: " + arrivaltempHigh[0] + "°F\n"
+                            arrivalWeatherDay1Lowel.textContent = "Low: " + arrivaltempLow[0] + "°F\n"
+                            arrivalWeatherDay1UVel.textContent = "UV Index: " + arrivalUVIndex[0]
+                            arrivalWeatherDay1Percipel.textContent = "Rain Chance: " + arrivalPercip[0] + "%"
+
+                           
+                            arrivalWeatherDay2Highel.textContent = "High: " + arrivaltempHigh[1] + "°F\n"
+                            arrivalWeatherDay2Lowel.textContent = "Low: " + arrivaltempLow[1] + "°F\n"
+                            arrivalWeatherDay2UVel.textContent = "UV Index: " + arrivalUVIndex[1]
+                            arrivalWeatherDay2Percipel.textContent = "Rain Chance: " + arrivalPercip[1] + "%"
 
 
-                            var arrivalDay4tempHigh = data.daily.temperature_2m_max[3]
-                            var arrivalDay4tempLow = data.daily.temperature_2m_min[3]
-                            var arrivalDay4UVIndex = data.daily.uv_index_max[3]
-                            arrivalWeatherDay4Highel.textContent = "High: " + arrivalDay4tempHigh + "°F\n"
-                            arrivalWeatherDay4Lowel.textContent = "Low: " + arrivalDay4tempLow + "°F\n"
-                            arrivalWeatherDay4UVel.textContent = "UV Index: " + arrivalDay4UVIndex
+                           
+                            arrivalWeatherDay3Highel.textContent = "High: " + arrivaltempHigh[2] + "°F\n"
+                            arrivalWeatherDay3Lowel.textContent = "Low: " + arrivaltempLow[2] + "°F\n"
+                            arrivalWeatherDay3UVel.textContent = "UV Index: " + arrivalUVIndex[2]
+                            arrivalWeatherDay3Percipel.textContent = "Rain Chance: " + arrivalPercip[2] + "%"
 
-                            var arrivalDay5tempHigh = data.daily.temperature_2m_max[4]
-                            var arrivalDay5tempHigh = data.daily.temperature_2m_max[4]
-                            var arrivalDay5tempLow = data.daily.temperature_2m_min[4]
-                            var arrivalDay5UVIndex = data.daily.uv_index_max[4]
-                            arrivalWeatherDay5Highel.textContent = "High: " + arrivalDay5tempHigh + "°F\n"
-                            arrivalWeatherDay5Lowel.textContent = "Low: " + arrivalDay5tempLow + "°F\n"
-                            arrivalWeatherDay5UVel.textContent = "UV Index: " + arrivalDay5UVIndex
+                            
+                            arrivalWeatherDay4Highel.textContent = "High: " + arrivaltempHigh[3] + "°F\n"
+                            arrivalWeatherDay4Lowel.textContent = "Low: " + arrivaltempLow[3]+ "°F\n"
+                            arrivalWeatherDay4UVel.textContent = "UV Index: " + arrivalUVIndex[3]
+                            arrivalWeatherDay4Percipel.textContent = "Rain Chance: " + arrivalPercip[3] + "%"
+
+                            
+                            arrivalWeatherDay5Highel.textContent = "High: " + arrivaltempHigh[4] + "°F\n"
+                            arrivalWeatherDay5Lowel.textContent = "Low: " + arrivaltempLow[4] + "°F\n"
+                            arrivalWeatherDay5UVel.textContent = "UV Index: " + arrivalUVIndex[4]
+                            arrivalWeatherDay5Percipel.textContent = "Rain Chance: " + arrivalPercip[4] + "%"
 
                             console.log(arrivalDay1tempHigh)
 
