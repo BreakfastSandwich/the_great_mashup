@@ -46,6 +46,19 @@ Unix timestamp
 Vanilla CSS
 Flexbox
 
+User Story: To have access to an application that can assist with air travel. To be able to check my flight and the weather at my departure and arrival 
+destinations to help determine if my flight will be on time. 
+
+Acceptance Criteria:
+When I go to the Url link 
+then I'm able to put in my flight information into a responsive form
+when I put in my flight number, departure and arrival cities
+then I recieve back data confirming my flight and the area weather at my
+departure and arrival destionation for up to 5 days at a time. 
+When I view the site
+then I find an interactive, responsive application. Using 2 server side API's 
+and client side storage.
+
 Installation
 No installation required. Access the application via 
 https://breakfastsandwich.github.io/the_great_mashup/
