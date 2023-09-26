@@ -41,16 +41,31 @@
     <div class="container-fluid">
       <div class="row bg-info flight_info">
 
-        <div id="flight-number-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          Flight Number</div>
-        <div id="departure-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center text-wrap">
-          <a href="#departure-weather-header">Departure Location</a>
+        <div class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          Flight Number <br>
+          <p id="flight-number-print"></p> <br>
+          <p>Departure Gate</p>
+          <p id="departure-gate"></p>
+
         </div>
-        <div id="arrival-city-print" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          <a href="#arrival-weather-header">Arrival Location</a>
+        <div id="departure-city" class="col-md-12 col-lg-2 m-5 fs-4 text-center text-wrap">
+          <a href="#departure-weather-header">Departure City</a><br>
+          <p id="departure-city-print"></p><br>
+          <p>Airport Code</p>
+          <p id="departure-IATA"></p>
         </div>
-        <div id="Current-flight-status" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
-          Current status</div>
+        <div id="arrival-city" class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          <a href="#arrival-weather-header">Arrival City 
+          </a><br>
+          <p id="arrival-city-print"></p><br>
+          <p>Airport Code</p>
+          <p id="arrival-IATA"></p>
+        </div>
+        <div  class="col-md-12 col-lg-2 m-5 fs-4 text-center">
+          Current Status <br>
+          <p id="Current-flight-status"></p><br>
+          <p>Arrival Gate</p>
+          <p id="arrival-gate"></p></div>
 
 
 <!-- Modal info -->

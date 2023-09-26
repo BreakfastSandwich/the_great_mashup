@@ -58,7 +58,7 @@ button:hover{
     border-radius: .5rem;
 }
 
-#arrival-city-print>a {
+#arrival-city>a {
     text-decoration: none;
     color: black;
 }
@@ -68,12 +68,12 @@ font-size: 1.4rem;
 
 }
 
-#departure-city-print>a {
+#departure-city>a {
     text-decoration: none;
     color: black;
 }
 
-#departure-city-print>a:hover {
+#departure-city>a:hover {
 font-size: 1.4rem;
 
 }
